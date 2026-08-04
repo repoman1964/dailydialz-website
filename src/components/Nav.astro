@@ -1,0 +1,113 @@
+---
+import { navLinks, site } from "../data/site";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
+  <nav class="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-4 px-4 sm:px-6" aria-label="Main">
+    <a href="/" class="text-xl font-bold tracking-tight text-text no-underline">{site.name}</a>
+
+    <ul class="hidden items-center gap-7 lg:flex">
+      {
+        navLinks.map((link) => {
+          const active = path === link.href || path.startsWith(link.href + "/");
+          return (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "text-[15px] no-underline transition-colors",
+                  active ? "text-text font-medium" : "text-text-secondary hover:text-text",
+                ]}
+                aria-current={active ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a href="/pricing" class="btn-primary hidden sm:inline-flex">Get DailyDialz</a>
+      <button
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded border border-border text-text lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-menu-toggle
+      >
+        <span class="sr-only">Open menu</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div
+  id="mobile-nav"
+  class="fixed inset-0 z-[60] hidden flex-col bg-bg px-6 pt-6 lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation"
+  data-menu-panel
+>
+  <div class="mb-10 flex items-center justify-between">
+    <span class="text-xl font-bold">{site.name}</span>
+    <button
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded border border-border"
+      data-menu-close
+      aria-label="Close menu"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+  <ul class="flex flex-col gap-1">
+    {
+      navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="block py-3 text-2xl font-medium text-text no-underline" data-menu-link>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+    <li class="pt-6">
+      <a href="/pricing" class="btn-primary w-full" data-menu-link>Get DailyDialz — {site.priceLabel}</a>
+    </li>
+  </ul>
+</div>
+
+<script>
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const panel = document.querySelector("[data-menu-panel]");
+  const closeBtn = document.querySelector("[data-menu-close]");
+  const links = document.querySelectorAll("[data-menu-link]");
+
+  function openMenu() {
+    panel?.classList.remove("hidden");
+    panel?.classList.add("flex");
+    toggle?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    panel?.classList.add("hidden");
+    panel?.classList.remove("flex");
+    toggle?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  toggle?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  links.forEach((el) => el.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+</script>

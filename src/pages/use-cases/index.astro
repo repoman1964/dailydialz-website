@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBar from "../../components/TrustBar.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import PageHero from "../../components/PageHero.astro";
+import { useCases } from "../../data/site";
+---
+
+<BaseLayout
+  title="Use Cases"
+  description="Who DailyDialz is for: solo founders, real estate and mortgage, recruiters, insurance producers, and local service businesses."
+>
+  <PageHero
+    label="USE CASES"
+    title="Built for people who sell by themselves."
+    subtitle="DailyDialz is not a call-center platform. It’s a calling tool for operators whose leads live in a spreadsheet and whose phone is already in their pocket."
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto grid max-w-[1100px] gap-4 sm:grid-cols-2">
+      {
+        useCases.map((u) => (
+          <a href={`/use-cases/${u.slug}`} class="card group flex flex-col p-8 no-underline transition hover:border-accent/30">
+            <h2 class="text-[26px] font-semibold text-text">{u.title}</h2>
+            <p class="mt-3 flex-1 text-[15px] leading-relaxed text-text-secondary">{u.short}</p>
+            <p class="mt-4 text-sm text-text-muted">{u.trigger}</p>
+            <span class="mt-6 text-sm font-medium text-accent group-hover:underline">View use case →</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

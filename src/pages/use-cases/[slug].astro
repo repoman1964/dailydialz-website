@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBar from "../../components/TrustBar.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import { getUseCase, useCaseDetails } from "../../data/useCaseDetails";
+import { site, useCases } from "../../data/site";
+
+export function getStaticPaths() {
+  return useCaseDetails.map((u) => ({ params: { slug: u.slug } }));
+}
+
+const { slug } = Astro.params;
+const uc = getUseCase(slug!);
+if (!uc) throw new Error(`Unknown use case: ${slug}`);
+
+const others = useCases.filter((u) => u.slug !== uc.slug);
+---
+
+<BaseLayout title={`${uc.title} · Use Cases`} description={uc.hero}>
+  <section class="border-b border-border bg-bg-secondary py-16 sm:py-20">
+    <div class="mx-auto max-w-[900px] px-4 text-center sm:px-6">
+      <p class="mono-label">{uc.eyebrow}</p>
+      <h1 class="mt-4 text-[40px] font-bold leading-[1.05] tracking-tight text-text sm:text-[56px]">{uc.hero}</h1>
+      <p class="mx-auto mt-5 max-w-[640px] text-lg leading-relaxed text-text-secondary">{uc.trigger}</p>
+      <div class="mt-8">
+        <a href="/pricing" class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
+      </div>
+    </div>
+  </section>
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto grid max-w-[1100px] gap-10 lg:grid-cols-2">
+      <div>
+        <SectionHeading label="FIT" title="When DailyDialz fits." align="left" />
+        <ul class="mt-8 space-y-3">
+          {
+            uc.fit.map((item) => (
+              <li class="flex gap-3 text-[15px] text-text-secondary">
+                <span class="text-accent" aria-hidden="true">
+                  ✓
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <SectionHeading label="SAMPLE DAY" title="A simple daily workflow." align="left" />
+        <ol class="mt-8 space-y-3">
+          {
+            uc.workflow.map((item, i) => (
+              <li class="card flex gap-4 px-5 py-4 text-[15px] text-text-secondary">
+                <span class="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                {item}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px]">
+      <SectionHeading label="WHAT NOT TO EXPECT" title="Stay honest about the job." align="left" />
+      <ul class="mt-8 space-y-3">
+        {
+          uc.notExpect.map((item) => (
+            <li class="flex gap-3 text-[15px] text-text-secondary">
+              <span class="text-text-muted" aria-hidden="true">
+                –
+              </span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1100px]">
+      <SectionHeading label="MORE USE CASES" title="Other operators we built for." />
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        {
+          others.map((o) => (
+            <a href={`/use-cases/${o.slug}`} class="card group p-6 no-underline transition hover:border-accent/30">
+              <h3 class="text-xl font-semibold text-text">{o.title}</h3>
+              <p class="mt-3 text-[14px] leading-relaxed text-text-secondary">{o.short}</p>
+              <span class="mt-4 inline-block text-sm font-medium text-accent group-hover:underline">View →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

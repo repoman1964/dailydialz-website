@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrustBar from "../components/TrustBar.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { site } from "../data/site";
+
+const steps = [
+  {
+    n: "01",
+    title: "Use your existing compatible mobile phone",
+    body: "No separate DailyDialz phone number is required for the standard mobile calling workflow. You bring the phone and the SIM you already use.",
+  },
+  {
+    n: "02",
+    title: "Upload your lead list",
+    body: "Import a CSV via the system file picker. DailyDialz detects common phone column headers and keeps other columns for context.",
+  },
+  {
+    n: "03",
+    title: "Review the next contact",
+    body: "See the lead information you need before the conversation starts—without hunting through a spreadsheet mid-session.",
+  },
+  {
+    n: "04",
+    title: "Tap to call",
+    body: "Launch the call through your device’s normal mobile calling path. You intentionally start each call—nothing runs unattended.",
+  },
+  {
+    n: "05",
+    title: "Record the outcome",
+    body: "After hang-up, mark what happened (No Answer, Voicemail, Interested, DNC, Callback, and more) and add an optional note.",
+  },
+  {
+    n: "06",
+    title: "Continue through the list",
+    body: "Choose CALL NEXT when you’re ready. Your place in the queue is preserved so interruptions don’t send you back to row one.",
+  },
+];
+
+const perCall = [
+  "Review the lead",
+  "Call current",
+  "Hang up",
+  "Select disposition (+ note)",
+  "CALL NEXT",
+];
+---
+
+<BaseLayout
+  title="How It Works"
+  description="From spreadsheet to first call with DailyDialz: import a CSV, tap to call on your existing mobile number, record outcomes, and continue."
+>
+  <PageHero
+    label="HOW IT WORKS"
+    title="From spreadsheet to first call—without buying another number."
+    subtitle="See how DailyDialz helps you load a prospect list, launch calls through your existing compatible mobile phone, record each outcome, and continue through your queue."
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[900px] space-y-4">
+      {
+        steps.map((s) => (
+          <div class="card flex flex-col gap-3 p-6 sm:flex-row sm:gap-8 sm:p-8">
+            <p class="shrink-0 font-mono text-sm text-accent sm:w-12">{s.n}</p>
+            <div>
+              <h2 class="text-[22px] font-semibold text-text sm:text-[24px]">{s.title}</h2>
+              <p class="mt-2 text-[15px] leading-relaxed text-text-secondary">{s.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[900px]">
+      <SectionHeading label="EACH CALL" title="What happens on every conversation." align="left" />
+      <ol class="mt-10 grid gap-3 sm:grid-cols-5">
+        {
+          perCall.map((item, i) => (
+            <li class="card p-5">
+              <p class="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</p>
+              <p class="mt-2 text-[15px] font-medium text-text">{item}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-8 text-[15px] leading-relaxed text-text-secondary">
+        Version one requires an intentional action between calls. That keeps you in control of pace, notes, and compliance
+        decisions—while still removing the number-typing marathon.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[760px]">
+      <div class="card border-border p-8">
+        <p class="mono-label">PLATFORM</p>
+        <h2 class="mt-3 text-[28px] font-bold text-text">Android-first mobile workflow</h2>
+        <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
+          DailyDialz v1 runs on {site.minAndroid}. It places cellular calls through your device SIM using the standard
+          mobile calling path. It is not a VoIP service and does not provide a DailyDialz phone number.
+        </p>
+        <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
+          Important: DailyDialz does not bypass laws, carrier requirements, or calling regulations. Your existing carrier,
+          operating system, location, and calling activity may still be subject to their own rules.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

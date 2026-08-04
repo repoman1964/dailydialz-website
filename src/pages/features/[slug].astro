@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBar from "../../components/TrustBar.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import FaqAccordion from "../../components/FaqAccordion.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import { featureDetails, getFeature, relatedFeatures } from "../../data/featureDetails";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return featureDetails.map((f) => ({ params: { slug: f.slug } }));
+}
+
+const { slug } = Astro.params;
+const feature = getFeature(slug!);
+if (!feature) {
+  throw new Error(`Unknown feature: ${slug}`);
+}
+const related = relatedFeatures(feature.slug);
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: feature.faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={feature.title} description={feature.subtitle} jsonLd={faqLd}>
+  <section class="border-b border-border bg-bg-secondary py-16 sm:py-20">
+    <div class="mx-auto max-w-[900px] px-4 text-center sm:px-6">
+      <p class="mono-label">{feature.eyebrow}</p>
+      <h1 class="mt-4 text-[40px] font-bold leading-[1.05] tracking-tight text-text sm:text-[56px]">{feature.title}</h1>
+      <p class="mx-auto mt-5 max-w-[640px] text-lg leading-relaxed text-text-secondary">{feature.subtitle}</p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/pricing" class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
+        <a href="/how-it-works" class="btn-ghost">See how it works →</a>
+      </div>
+    </div>
+  </section>
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px]">
+      <SectionHeading label="WHAT’S INCLUDED" title="Capabilities in this area." align="left" />
+      <ul class="mt-10 space-y-3">
+        {
+          feature.included.map((item) => (
+            <li class="flex gap-3 text-[16px] text-text-secondary">
+              <span class="mt-1 text-accent" aria-hidden="true">
+                ✓
+              </span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px]">
+      <SectionHeading label="WHO THIS IS FOR" title="If this sounds familiar." align="left" />
+      <ul class="mt-10 space-y-3">
+        {
+          feature.whoFor.map((item) => (
+            <li class="card px-5 py-4 text-[15px] text-text-secondary">{item}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1100px]">
+      <SectionHeading label="PROCESS" title="How it fits the workflow." />
+      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          feature.process.map((p) => (
+            <div class="card p-6">
+              <p class="font-mono text-sm text-accent">{p.n}</p>
+              <h3 class="mt-3 text-lg font-semibold text-text">{p.title}</h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-text-secondary">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-12 sm:px-6">
+    <div class="mx-auto max-w-[800px]">
+      <div class="card border-border p-6 sm:p-8">
+        <p class="mono-label">IMPORTANT CLARIFICATION</p>
+        <p class="mt-3 text-[15px] leading-relaxed text-text-secondary">
+          DailyDialz does not bypass laws, carrier requirements, or calling regulations. It simply does not require you to
+          purchase a separate DailyDialz-provided phone number for its standard mobile calling workflow. Your existing
+          carrier, operating system, location, and calling activity may still be subject to their own rules.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px]">
+      <SectionHeading label="FAQ" title="Common questions." align="left" />
+      <div class="mt-10">
+        <FaqAccordion items={feature.faqs} idPrefix={feature.slug} />
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1100px]">
+      <SectionHeading label="RELATED" title="Other capabilities." />
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        {
+          related.map((r) => (
+            <a href={`/features/${r.slug}`} class="card group p-6 no-underline transition hover:border-accent/30">
+              <p class="mono-label">{r.eyebrow}</p>
+              <h3 class="mt-3 text-xl font-semibold text-text">{r.title}</h3>
+              <p class="mt-3 text-[14px] leading-relaxed text-text-secondary line-clamp-3">{r.subtitle}</p>
+              <span class="mt-4 inline-block text-sm font-medium text-accent group-hover:underline">Learn more →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

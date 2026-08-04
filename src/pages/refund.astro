@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Refund Policy" description={`DailyDialz ${site.refundDays}-day refund policy for founder licenses.`}>
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <article class="prose-legal mx-auto max-w-[760px]">
+      <p class="mono-label">LEGAL</p>
+      <h1 class="mt-3 text-[40px] font-bold text-text sm:text-[48px]">Refund Policy</h1>
+      <p class="mt-4 text-sm text-text-muted">Last updated: August 3, 2026</p>
+
+      <h2>1. Refund window</h2>
+      <p>
+        If DailyDialz is not a fit for your workflow, you may request a refund within <strong class="text-text">{site.refundDays} days</strong> of purchase,
+        subject to the terms shown at checkout (which control if they differ).
+      </p>
+
+      <h2>2. How to request</h2>
+      <p>
+        Email <a class="text-text underline decoration-border underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a> with:
+      </p>
+      <ul>
+        <li>The email used at checkout</li>
+        <li>Order / receipt ID</li>
+        <li>A brief reason (helps us improve; not a condition for an eligible refund)</li>
+      </ul>
+
+      <h2>3. Processing</h2>
+      <p>
+        Approved refunds are returned to the original payment method through the payment processor. Timing depends on your
+        bank or card issuer after we process the request.
+      </p>
+
+      <h2>4. Exclusions</h2>
+      <p>
+        Refunds may be declined for abuse (for example repeated purchase-refund cycles), chargebacks already in process,
+        purchases outside the stated window, or licenses obtained through unauthorized channels. Chargebacks may result in
+        license revocation.
+      </p>
+
+      <h2>5. After a refund</h2>
+      <p>
+        Upon refund, your license ends and you must stop using the software and delete distributed copies obtained under that
+        purchase.
+      </p>
+    </article>
+  </section>
+  <CtaBand />
+</BaseLayout>

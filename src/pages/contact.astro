@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrustBar from "../components/TrustBar.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact DailyDialz for pricing, technical, or refund questions. We respond as soon as we can."
+>
+  <PageHero
+    label="GET IN TOUCH"
+    title="Questions before you buy?"
+    subtitle={`Email ${site.email} or send a message below. For purchase, go straight to pricing.`}
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto grid max-w-[1100px] gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <div class="card p-7">
+          <p class="mono-label">CONTACT</p>
+          <ul class="mt-6 space-y-4 text-[15px] text-text-secondary">
+            <li>
+              <span class="block text-xs tracking-wide text-text-muted uppercase">Email</span>
+              <a class="mt-1 inline-block text-text no-underline hover:text-accent" href={`mailto:${site.email}`}>{site.email}</a>
+            </li>
+            <li>
+              <span class="block text-xs tracking-wide text-text-muted uppercase">Product</span>
+              <a class="mt-1 inline-block text-text no-underline hover:text-accent" href="/pricing">Get DailyDialz — {site.priceLabel}</a>
+            </li>
+            <li>
+              <span class="block text-xs tracking-wide text-text-muted uppercase">Topics we can help with</span>
+              <p class="mt-1">Pricing · Technical · Refunds · Partnerships · Press</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <form class="card space-y-5 p-7 sm:p-8" method="post" action={`mailto:${site.email}`} enctype="text/plain">
+          <div>
+            <label for="name" class="mb-2 block text-sm font-medium text-text">Name</label>
+            <input
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+              class="w-full rounded border border-border bg-bg px-4 py-3 text-text outline-none focus:border-accent"
+            />
+          </div>
+          <div>
+            <label for="email" class="mb-2 block text-sm font-medium text-text">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              class="w-full rounded border border-border bg-bg px-4 py-3 text-text outline-none focus:border-accent"
+            />
+          </div>
+          <div>
+            <label for="role" class="mb-2 block text-sm font-medium text-text">Role</label>
+            <select
+              id="role"
+              name="role"
+              class="w-full rounded border border-border bg-bg px-4 py-3 text-text outline-none focus:border-accent"
+            >
+              <option>Solo founder</option>
+              <option>Real estate / mortgage</option>
+              <option>Recruiter</option>
+              <option>Insurance / local services</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="topic" class="mb-2 block text-sm font-medium text-text">Topic</label>
+            <select
+              id="topic"
+              name="topic"
+              class="w-full rounded border border-border bg-bg px-4 py-3 text-text outline-none focus:border-accent"
+            >
+              <option>Pricing</option>
+              <option>Technical</option>
+              <option>Refund</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="mb-2 block text-sm font-medium text-text">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              class="w-full rounded border border-border bg-bg px-4 py-3 text-text outline-none focus:border-accent"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full sm:w-auto">Send message →</button>
+          <p class="text-sm text-text-muted">
+            Form opens your email client for now. A hosted form endpoint can be wired at launch.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

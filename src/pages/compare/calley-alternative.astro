@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBar from "../../components/TrustBar.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import PageHero from "../../components/PageHero.astro";
+import { site } from "../../data/site";
+
+const rows = [
+  {
+    dim: "Category framing",
+    calley: "Established mobile auto-dialer with broad feature catalog",
+    dd: "Independently developed spreadsheet-to-call workflow for solo operators",
+  },
+  {
+    dim: "Phone number",
+    calley: "SIM-based mobile dialing among other modes (per their product)",
+    dd: "Standard workflow uses your existing compatible mobile setup—no DailyDialz-provided number",
+  },
+  {
+    dim: "List import",
+    calley: "Web panel + sync workflows documented publicly; multiple formats",
+    dd: "On-device CSV import via system file picker; local-first v1",
+  },
+  {
+    dim: "Call control",
+    calley: "Multiple dialing modes and dispositions",
+    dd: "Intentional Call Current / CALL NEXT; session stop; queue persistence",
+  },
+  {
+    dim: "Pricing model",
+    calley: "Published recurring subscription plans (verify current prices)",
+    dd: `${site.priceLabel} one-time founder license (12 months updates included)`,
+  },
+  {
+    dim: "Best fit",
+    calley: "Users who want a wide integration and mode catalog",
+    dd: "Solo sellers who want less setup and less daily spreadsheet friction",
+  },
+];
+---
+
+<BaseLayout
+  title="Calley Alternative"
+  description="DailyDialz is an independently developed mobile calling workflow and Calley alternative focused on solo operators, CSV lists, and one-time pricing."
+>
+  <PageHero
+    label="COMPARE"
+    title="An independent Calley alternative for spreadsheet-first callers."
+    subtitle="DailyDialz is not affiliated with, endorsed by, or sponsored by Calley. This page explains positioning differences in plain language—not a claim that every feature matches."
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1000px] overflow-x-auto">
+      <table class="w-full min-w-[720px] border-collapse text-left text-[14px]">
+        <thead>
+          <tr class="border-b border-border">
+            <th class="px-4 py-4 font-mono text-xs tracking-wide text-text-muted uppercase">Dimension</th>
+            <th class="px-4 py-4 font-mono text-xs tracking-wide text-text-muted uppercase">Calley (general)</th>
+            <th class="px-4 py-4 font-mono text-xs tracking-wide text-accent uppercase">DailyDialz</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((r) => (
+              <tr class="border-b border-border align-top">
+                <td class="px-4 py-4 font-medium text-text">{r.dim}</td>
+                <td class="px-4 py-4 text-text-secondary">{r.calley}</td>
+                <td class="px-4 py-4 text-text-secondary">{r.dd}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[760px] space-y-5 text-[16px] leading-relaxed text-text-secondary">
+      <h2 class="text-[28px] font-bold text-text sm:text-[36px]">What we optimize for</h2>
+      <p>
+        DailyDialz is built around two frictions solo operators hit constantly: heavy setup around separate business numbers,
+        and the daily grind of typing numbers from a spreadsheet. The product places intentional cellular calls through your
+        device and keeps outcomes in a simple queue.
+      </p>
+      <p>
+        If you need the widest integration catalog, multi-agent call-center controls, or features DailyDialz has not shipped,
+        evaluate tools against your actual checklist. Do not take absolute reliability claims from anyone—including us—without
+        testing your own lists and devices.
+      </p>
+      <h2 class="pt-6 text-[28px] font-bold text-text sm:text-[36px]">Claim standards</h2>
+      <ul class="list-disc space-y-2 pl-5">
+        <li>We state features we ship and can demonstrate.</li>
+        <li>We do not market DailyDialz as a “clone.”</li>
+        <li>We do not use competitor logos or screenshots as decorative marketing assets.</li>
+        <li>Competitor pricing and features change—verify current details on the competitor’s site.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-12 sm:px-6">
+    <div class="mx-auto max-w-[760px] text-sm leading-relaxed text-text-muted">
+      <p>
+        Calley is a trademark of its respective owner. DailyDialz is an independently developed product and is not affiliated
+        with, endorsed by, or sponsored by Calley. Feature and price comparisons were framed for marketing clarity as of August
+        3, 2026 and may change. Tests and suitability depend on your files, devices, and versions.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Try the DailyDialz workflow."
+    body={`Founder license ${site.priceLabel} once. Built for solo outbound on Android.`}
+  />
+</BaseLayout>

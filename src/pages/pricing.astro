@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrustBar from "../components/TrustBar.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PageHero from "../components/PageHero.astro";
+import { site, soloIncludes } from "../data/site";
+
+const offerLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "DailyDialz Solo",
+  description: site.description,
+  brand: { "@type": "Brand", name: site.name },
+  offers: {
+    "@type": "Offer",
+    price: String(site.price),
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+---
+
+<BaseLayout
+  title="Pricing"
+  description={`DailyDialz founder license: ${site.priceLabel} one time. Use your existing mobile number. No monthly subscription.`}
+  jsonLd={offerLd}
+  showAnnouncement
+>
+  <PageHero
+    label="FOUNDER LICENSE"
+    title="Pay once. Use the phone you already have."
+    subtitle="No monthly DailyDialz subscription. No separate DailyDialz phone-number charge for the standard mobile workflow."
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[560px]">
+      <div class="card border-accent/30 p-8 sm:p-10">
+        <p class="mono-label">DAILYDIALZ SOLO</p>
+        <p class="mt-4 flex items-baseline gap-2">
+          <span class="text-[56px] font-bold tabular-nums tracking-tight text-text sm:text-[64px]">{site.priceLabel}</span>
+          <span class="text-lg text-text-secondary">one time</span>
+        </p>
+        <p class="mt-3 text-[15px] text-text-secondary">For one independent seller.</p>
+        <ul class="mt-8 space-y-3">
+          {
+            soloIncludes.map((item) => (
+              <li class="flex gap-3 text-[15px] text-text-secondary">
+                <span class="mt-0.5 text-accent" aria-hidden="true">
+                  ✓
+                </span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={site.checkoutUrl} class="btn-primary mt-10 w-full">Get DailyDialz Solo — {site.priceLabel}</a>
+        <p class="mt-4 text-center text-sm text-text-muted">One payment of {site.priceLabel}. Checkout link will be connected at launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[720px] text-center">
+      <p class="mono-label">VALUE</p>
+      <h2 class="mt-3 text-[36px] font-bold leading-tight text-text sm:text-[48px]">
+        What is one completed call block worth?
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-text-secondary">
+        DailyDialz does not have to revolutionize your entire company. It only needs to help you consistently complete the
+        calls that lead to one additional client, appointment, placement, policy, listing, contract, project, or sale.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed text-text-secondary">
+        Because the founder license is a one-time purchase, the software does not keep taking money from your account month
+        after month.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-[720px]">
+      <div class="card p-8 sm:p-10">
+        <p class="mono-label">GUARANTEE</p>
+        <h2 class="mt-3 text-[28px] font-bold text-text sm:text-[36px]">See whether it fits your real workflow.</h2>
+        <p class="mt-4 text-[16px] leading-relaxed text-text-secondary">
+          Try DailyDialz for {site.refundDays} days. Use your actual phone. Upload a real or test lead list. Run your normal
+          calling session. See whether it makes it easier to start and finish your daily calls.
+        </p>
+        <p class="mt-4 text-[16px] leading-relaxed text-text-secondary">
+          If it is not a fit, request a refund within {site.refundDays} days under the{" "}
+          <a href="/refund" class="text-text underline decoration-border underline-offset-4 hover:text-accent">stated refund terms</a>.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={site.checkoutUrl} class="btn-primary">Get DailyDialz — {site.priceLabel} once</a>
+          <a href="/contact" class="btn-ghost">Questions? Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-bg-secondary px-4 py-12 sm:px-6">
+    <div class="mx-auto max-w-[760px] text-sm leading-relaxed text-text-muted">
+      <p>
+        DailyDialz is independently developed software. It is not a VoIP provider and does not sell you a phone number.
+        Pricing comparisons to monthly dialer subscriptions should be verified against current competitor pricing. Feature
+        availability reflects the current Android product capabilities described on this site.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand heading="Ready when you are." body={`${site.priceLabel} once. ${site.refundDays}-day refund window under stated terms.`} />
+</BaseLayout>

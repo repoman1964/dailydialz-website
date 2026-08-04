@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrustBar from "../components/TrustBar.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PageHero from "../components/PageHero.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import { fullFaqs } from "../data/site";
+
+const flat = fullFaqs.flatMap((g) => g.items);
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: flat.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Frequently asked questions about DailyDialz: numbers, KYC, VoIP, CSV import, pricing, refunds, Android support, and compliance."
+  jsonLd={faqLd}
+>
+  <PageHero
+    label="QUESTIONS"
+    title="Everything you’re wondering, grouped by topic."
+    subtitle="Straight answers. No call-center jargon."
+  />
+  <TrustBar />
+
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px] space-y-16">
+      {
+        fullFaqs.map((group) => (
+          <div>
+            <h2 class="text-[24px] font-semibold text-text sm:text-[28px]">{group.group}</h2>
+            <div class="mt-6">
+              <FaqAccordion items={group.items} idPrefix={group.group.replace(/\s+/g, "-").toLowerCase()} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

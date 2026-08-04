@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Terms of Service" description="Terms of Service for DailyDialz software and website.">
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
+    <article class="prose-legal mx-auto max-w-[760px]">
+      <p class="mono-label">LEGAL</p>
+      <h1 class="mt-3 text-[40px] font-bold text-text sm:text-[48px]">Terms of Service</h1>
+      <p class="mt-4 text-sm text-text-muted">Last updated: August 3, 2026</p>
+
+      <h2>1. Agreement Summary</h2>
+      <p>
+        By accessing this website or purchasing a DailyDialz license, you agree to these Terms. DailyDialz is calling-workflow
+        software for compatible Android devices. It is not a telecommunications carrier, VoIP provider, or legal advisory service.
+      </p>
+
+      <h2>2. License & Updates</h2>
+      <p>
+        A paid Solo founder license grants you a personal, non-exclusive, non-transferable (except as allowed in writing)
+        right to use the purchased version of the software for outbound calling workflows on a compatible device, subject to
+        these Terms and any license terms shown at checkout.
+      </p>
+      <p>
+        Purchases include {site.updatesMonths} months of updates from the purchase date unless otherwise stated at checkout.
+        After the included update period, the purchased version remains usable under the license terms; continued new feature
+        updates may require optional maintenance if offered.
+      </p>
+
+      <h2>3. Intellectual Property</h2>
+      <p>
+        DailyDialz software, branding, and site content are owned by DailyDialz / its operator. You do not acquire ownership of
+        the software—only a license to use it. You may not reverse engineer, resell, or redistribute the software except as
+        permitted by law or written agreement.
+      </p>
+
+      <h2>4. Acceptable Use & Client Responsibilities</h2>
+      <ul>
+        <li>You are responsible for complying with all applicable telemarketing, consent, do-not-call, recording, privacy, and carrier rules.</li>
+        <li>You must not use DailyDialz for unlawful harassment, fraud, or spam.</li>
+        <li>You are responsible for the accuracy of lists you import and for securing your device.</li>
+        <li>You acknowledge that call behavior can vary by OEM, Android version, multi-SIM configuration, and carrier.</li>
+      </ul>
+
+      <h2>5. Support & Maintenance</h2>
+      <p>
+        Standard support during the included update window is provided on a commercially reasonable basis via{" "}
+        {site.email}. Response times are not guaranteed unless a separate support agreement says otherwise.
+      </p>
+
+      <h2>6. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by law, DailyDialz and its operators are not liable for indirect, incidental, special,
+        consequential, or punitive damages, or for lost profits, lost deals, or business interruption. Total liability for any
+        claim related to the software or site is limited to the amount you paid for the license in the twelve months before the
+        claim.
+      </p>
+
+      <h2>7. Governing Law</h2>
+      <p>
+        These Terms are governed by the laws of the jurisdiction designated by the operator at checkout or in an updated
+        policy, without regard to conflict-of-law principles. Venue for disputes will be the courts of that jurisdiction unless
+        mandatory consumer protections require otherwise.
+      </p>
+
+      <h2>8. Contact</h2>
+      <p>
+        <a class="text-text underline decoration-border underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </article>
+  </section>
+  <CtaBand />
+</BaseLayout>
