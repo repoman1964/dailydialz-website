@@ -1,75 +1,570 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CtaBand from "../components/CtaBand.astro";
 import { site } from "../data/site";
 ---
 
-<BaseLayout title="Terms of Service" description="Terms of Service for DailyDialz software and website.">
+<BaseLayout
+  title="Terms and Conditions"
+  description="DailyDialz Terms and Conditions governing purchase, installation, access, and use of the software."
+  canonicalPath="/terms"
+  hideNav
+>
   <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
     <article class="prose-legal mx-auto max-w-[760px]">
-      <p class="mono-label">LEGAL</p>
-      <h1 class="mt-3 text-[40px] font-bold text-text sm:text-[48px]">Terms of Service</h1>
-      <p class="mt-4 text-sm text-text-muted">Last updated: August 3, 2026</p>
+      <h1 class="text-[40px] font-bold text-text sm:text-[48px]">DailyDialz Terms and Conditions</h1>
+      <p class="mt-4 text-sm text-text-muted">Effective Date: August 8, 2026</p>
 
-      <h2>1. Agreement Summary</h2>
       <p>
-        By accessing this website or purchasing a DailyDialz license, you agree to these Terms. DailyDialz is calling-workflow
-        software for compatible Android devices. It is not a telecommunications carrier, VoIP provider, or legal advisory service.
-      </p>
-
-      <h2>2. License & Updates</h2>
-      <p>
-        A paid Solo founder license grants you a personal, non-exclusive, non-transferable (except as allowed in writing)
-        right to use the purchased version of the software for outbound calling workflows on a compatible device, subject to
-        these Terms and any license terms shown at checkout.
+        These Terms and Conditions ("Terms") govern your purchase, installation, access to and use of DailyDialz.
       </p>
       <p>
-        Purchases include {site.updatesMonths} months of updates from the purchase date unless otherwise stated at checkout.
-        After the included update period, the purchased version remains usable under the license terms; continued new feature
-        updates may require optional maintenance if offered.
+        DailyDialz is a product of <strong class="font-semibold text-text">Dimension Seven Systems</strong>
+        ("Dimension Seven Systems," "DailyDialz," "we," "us" or "our").
       </p>
-
-      <h2>3. Intellectual Property</h2>
       <p>
-        DailyDialz software, branding, and site content are owned by DailyDialz / its operator. You do not acquire ownership of
-        the software—only a license to use it. You may not reverse engineer, resell, or redistribute the software except as
-        permitted by law or written agreement.
+        By purchasing, downloading, installing, accessing or using DailyDialz, you agree to these Terms. If you do not
+        agree to these Terms, do not purchase, install or use DailyDialz.
       </p>
 
-      <h2>4. Acceptable Use & Client Responsibilities</h2>
+      <h2>1. About DailyDialz</h2>
+      <p>
+        DailyDialz is a software tool designed to help users work through calling lists using their own compatible mobile
+        device, telephone service and lead data.
+      </p>
+      <p>DailyDialz may allow you to:</p>
       <ul>
-        <li>You are responsible for complying with all applicable telemarketing, consent, do-not-call, recording, privacy, and carrier rules.</li>
-        <li>You must not use DailyDialz for unlawful harassment, fraud, or spam.</li>
-        <li>You are responsible for the accuracy of lists you import and for securing your device.</li>
-        <li>You acknowledge that call behavior can vary by OEM, Android version, multi-SIM configuration, and carrier.</li>
+        <li>Select or access authorized Google Sheets</li>
+        <li>Display lead information</li>
+        <li>Initiate calls through your mobile device</li>
+        <li>Record call dispositions</li>
+        <li>Enter notes</li>
+        <li>Maintain your position in a calling queue</li>
+        <li>Resume calling sessions</li>
+        <li>Write authorized information back to a Google Sheet</li>
+        <li>Perform other related calling-workflow functions</li>
       </ul>
-
-      <h2>5. Support & Maintenance</h2>
+      <p>DailyDialz is a productivity tool.</p>
       <p>
-        Standard support during the included update window is provided on a commercially reasonable basis via{" "}
-        {site.email}. Response times are not guaranteed unless a separate support agreement says otherwise.
+        It does not provide leads, telephone service, legal advice, regulatory compliance services or a guarantee of sales
+        results.
       </p>
 
-      <h2>6. Limitation of Liability</h2>
+      <h2>2. Eligibility</h2>
+      <p>You must be legally capable of entering into a binding agreement to use DailyDialz.</p>
+      <p>DailyDialz is intended for business and professional use and is not intended for children.</p>
       <p>
-        To the maximum extent permitted by law, DailyDialz and its operators are not liable for indirect, incidental, special,
-        consequential, or punitive damages, or for lost profits, lost deals, or business interruption. Total liability for any
-        claim related to the software or site is limited to the amount you paid for the license in the twelve months before the
-        claim.
+        If you use DailyDialz on behalf of a company or other organization, you represent that you have authority to accept
+        these Terms on that organization's behalf.
       </p>
 
-      <h2>7. Governing Law</h2>
+      <h2>3. Your DailyDialz License</h2>
+      <p>When you purchase DailyDialz, you are purchasing a license to use the software subject to these Terms.</p>
       <p>
-        These Terms are governed by the laws of the jurisdiction designated by the operator at checkout or in an updated
-        policy, without regard to conflict-of-law principles. Venue for disputes will be the courts of that jurisdiction unless
-        mandatory consumer protections require otherwise.
+        You are not purchasing ownership of DailyDialz or its underlying source code, intellectual property or technology.
+      </p>
+      <p>Unless your specific license states otherwise, your license is:</p>
+      <ul>
+        <li>Limited</li>
+        <li>Non-exclusive</li>
+        <li>Non-transferable</li>
+        <li>Revocable under these Terms</li>
+        <li>Intended for the number of users or devices permitted by the license you purchased</li>
+      </ul>
+      <p>Your right to use DailyDialz continues subject to these Terms and any applicable license restrictions.</p>
+
+      <h2>4. One-Time Purchase</h2>
+      <p>DailyDialz may be offered for a one-time purchase price.</p>
+      <p>
+        A one-time purchase means you are not charged a recurring DailyDialz subscription fee merely to continue using the
+        version of the software covered by your license.
+      </p>
+      <p>
+        A one-time purchase does not mean that Dimension Seven Systems is obligated to provide every future product,
+        feature, service, operating-system update or major version of DailyDialz indefinitely at no additional charge.
+      </p>
+      <p>
+        Any included update period, support period or upgrade entitlement will be described with the offer you purchase.
       </p>
 
-      <h2>8. Contact</h2>
+      <h2>5. 14-Day Money-Back Guarantee</h2>
       <p>
-        <a class="text-text underline decoration-border underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a>
+        Eligible DailyDialz purchases are covered by our{" "}
+        <strong class="font-semibold text-text">14-day money-back guarantee</strong>.
+      </p>
+      <p>
+        You may request a refund within 14 calendar days of your original purchase date in accordance with the{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/refund"
+          >DailyDialz Refund Policy</a
+        >.
+      </p>
+      <p>You do not need to prove that DailyDialz is defective to use the guarantee.</p>
+      <p>If a refund is issued, your license to use DailyDialz terminates.</p>
+      <p>
+        Following a refund, you must stop using DailyDialz and may be required to uninstall the application.
+      </p>
+      <p>
+        Where supported by our licensing system, access associated with the refunded license may be disabled.
+      </p>
+      <p>
+        The complete terms of the guarantee are contained in the{" "}
+        <strong class="font-semibold text-text">DailyDialz Refund Policy</strong>, which is incorporated into these Terms
+        by reference.
+      </p>
+
+      <h2>6. License Restrictions</h2>
+      <p>You may not, except where applicable law expressly permits otherwise:</p>
+      <ul>
+        <li>Copy or distribute DailyDialz except as authorized</li>
+        <li>Sell, sublicense, rent, lease or transfer your license</li>
+        <li>Share a single-user license among unauthorized users</li>
+        <li>Circumvent or attempt to circumvent licensing or activation controls</li>
+        <li>Remove or alter copyright, trademark or proprietary notices</li>
+        <li>Modify DailyDialz for unauthorized distribution</li>
+        <li>Extract or attempt to obtain DailyDialz source code</li>
+        <li>Reverse engineer, decompile or disassemble DailyDialz</li>
+        <li>Create unauthorized derivative works based on DailyDialz</li>
+        <li>Use DailyDialz to develop or assist in developing an unauthorized copy or substantially similar product</li>
+        <li>Interfere with security, licensing or technical protections</li>
+        <li>
+          Use false identities or multiple accounts to evade licensing requirements, restrictions or refund rules
+        </li>
+      </ul>
+      <p>
+        Nothing in this section prohibits activity that applicable law expressly gives you the right to perform despite
+        contractual restrictions.
+      </p>
+
+      <h2>7. Your Lead Lists and Data</h2>
+      <p>You are responsible for the data you choose to use with DailyDialz.</p>
+      <p>You represent that you have the right to possess and use the information contained in your calling lists.</p>
+      <p>Dimension Seven Systems does not claim ownership of your lead lists.</p>
+      <p>You remain responsible for:</p>
+      <ul>
+        <li>The source of your lead data</li>
+        <li>The accuracy of your lead data</li>
+        <li>Your legal right to possess and use that data</li>
+        <li>Obtaining any consent required to contact individuals</li>
+        <li>Maintaining applicable suppression or Do Not Call records</li>
+        <li>Following applicable privacy and communications laws</li>
+      </ul>
+      <p>
+        DailyDialz providing the technical ability to place a call does not mean that a particular call is lawful or
+        authorized.
+      </p>
+
+      <h2>8. Telemarketing and Calling Compliance</h2>
+      <p>
+        <strong class="font-semibold text-text"
+          >YOU ARE RESPONSIBLE FOR THE CALLS YOU MAKE USING DAILYDIALZ.</strong
+        >
+      </p>
+      <p>DailyDialz does not determine whether a particular person may legally be called.</p>
+      <p>
+        Depending on your location, the recipient's location, the nature of the call and other circumstances, your calling
+        activity may be subject to federal, state, local or international laws and regulations concerning matters such as:
+      </p>
+      <ul>
+        <li>Telemarketing</li>
+        <li>Telephone solicitation</li>
+        <li>Do Not Call requirements</li>
+        <li>Consent</li>
+        <li>Calling hours</li>
+        <li>Caller identification</li>
+        <li>Call recording</li>
+        <li>Automated or prerecorded communications</li>
+        <li>Privacy</li>
+        <li>Consumer protection</li>
+        <li>Industry-specific communications</li>
+      </ul>
+      <p>
+        You are responsible for determining which rules apply to your calling activities and complying with them.
+      </p>
+      <p>
+        Dimension Seven Systems does not provide legal advice and does not represent that using DailyDialz automatically
+        makes your calling activity compliant with any law or regulation.
+      </p>
+
+      <h2>9. Do Not Call Information</h2>
+      <p>
+        If DailyDialz provides features for recording or displaying Do Not Call information, those features are tools to
+        assist your workflow.
+      </p>
+      <p>They do not replace your legal obligations.</p>
+      <p>
+        You remain responsible for maintaining any legally required suppression lists and ensuring that people who should
+        not be called are not called.
+      </p>
+
+      <h2>10. Your Phone and Mobile Carrier</h2>
+      <p>DailyDialz uses or interacts with your own mobile device and calling service.</p>
+      <p>Dimension Seven Systems is not your telephone carrier.</p>
+      <p>Your calls may be subject to your carrier's:</p>
+      <ul>
+        <li>Calling plan</li>
+        <li>Usage limits</li>
+        <li>Network availability</li>
+        <li>Roaming charges</li>
+        <li>Data charges</li>
+        <li>Acceptable-use policies</li>
+        <li>Anti-spam systems</li>
+        <li>Caller-ID practices</li>
+        <li>Service restrictions</li>
+      </ul>
+      <p>You are responsible for all carrier charges and for complying with your carrier's terms.</p>
+      <p>
+        Dimension Seven Systems does not control whether your carrier completes, blocks, limits, labels or otherwise handles
+        a call.
+      </p>
+
+      <h2>11. Google Services</h2>
+      <p>DailyDialz may integrate with Google services, including Google Drive and Google Sheets.</p>
+      <p>
+        You may be required to authorize DailyDialz to access specific Google resources in order to use those features.
+      </p>
+      <p>
+        Your use of Google products remains subject to Google's own terms, policies and account requirements.
+      </p>
+      <p>Dimension Seven Systems does not control Google services and is not responsible for:</p>
+      <ul>
+        <li>Google service interruptions</li>
+        <li>Google account restrictions</li>
+        <li>Changes to Google APIs</li>
+        <li>Changes to Google permissions</li>
+        <li>Google authentication issues</li>
+        <li>Google account security</li>
+        <li>Information deleted or modified directly through your Google account</li>
+      </ul>
+      <p>
+        You may revoke DailyDialz's Google access through your Google account, although doing so may prevent Google-dependent
+        DailyDialz features from functioning.
+      </p>
+
+      <h2>12. Third-Party Services</h2>
+      <p>DailyDialz may interact with services provided by third parties, including:</p>
+      <ul>
+        <li>Google</li>
+        <li>Mobile carriers</li>
+        <li>Payment processors</li>
+        <li>Hosting providers</li>
+        <li>Authentication providers</li>
+        <li>Email providers</li>
+        <li>Other technical service providers</li>
+      </ul>
+      <p>Those services are operated independently and may have their own terms and privacy policies.</p>
+      <p>
+        Dimension Seven Systems is not responsible for the availability, performance, policies or actions of independent
+        third-party services.
+      </p>
+
+      <h2>13. Payments</h2>
+      <p>
+        You agree to pay the price presented to you at the time of purchase, including applicable taxes or other charges
+        disclosed before purchase.
+      </p>
+      <p>Payment may be processed by an independent payment processor.</p>
+      <p>By submitting a payment, you represent that you are authorized to use the payment method provided.</p>
+      <p>
+        Except as provided by the 14-day money-back guarantee, applicable law or another written offer from Dimension Seven
+        Systems, completed purchases are subject to the{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/refund"
+          >DailyDialz Refund Policy</a
+        >.
+      </p>
+
+      <h2>14. Software Updates</h2>
+      <p>
+        Dimension Seven Systems may release updates, fixes, security improvements or new versions of DailyDialz.
+      </p>
+      <p>
+        Some updates may be necessary for continued compatibility, security or access to particular features.
+      </p>
+      <p>We may:</p>
+      <ul>
+        <li>Modify features</li>
+        <li>Add features</li>
+        <li>Remove features</li>
+        <li>Correct errors</li>
+        <li>Change technical requirements</li>
+        <li>Change integrations</li>
+        <li>Change supported operating-system versions</li>
+        <li>Discontinue functionality that becomes technically, commercially or legally impractical to maintain</li>
+      </ul>
+      <p>
+        We will not intentionally remove your purchased license merely to force you into a recurring subscription.
+      </p>
+      <p>
+        However, we cannot guarantee that every version of DailyDialz will remain compatible forever with future devices,
+        operating systems, Google APIs, carrier systems or other third-party technologies outside our control.
+      </p>
+
+      <h2>15. Compatibility</h2>
+      <p>
+        You are responsible for using DailyDialz with a supported device, operating system and calling setup.
+      </p>
+      <p>
+        Compatibility information may change as mobile operating systems and third-party services evolve.
+      </p>
+      <p>
+        The 14-day money-back guarantee gives you an opportunity after purchase to determine whether DailyDialz works
+        satisfactorily with your setup.
+      </p>
+
+      <h2>16. Product Availability</h2>
+      <p>
+        We work to keep DailyDialz functional and available, but we cannot promise uninterrupted or error-free operation.
+      </p>
+      <p>Software can experience:</p>
+      <ul>
+        <li>Bugs</li>
+        <li>Compatibility issues</li>
+        <li>Service interruptions</li>
+        <li>API failures</li>
+        <li>Network failures</li>
+        <li>Device-specific problems</li>
+        <li>Third-party outages</li>
+        <li>Security-related interruptions</li>
+      </ul>
+      <p>
+        We may temporarily suspend functionality when reasonably necessary for maintenance, security, legal compliance or
+        technical reasons.
+      </p>
+
+      <h2>17. No Guarantee of Sales Results</h2>
+      <p>DailyDialz is designed to reduce friction in the calling workflow.</p>
+      <p>It does not make sales for you.</p>
+      <p>We do not guarantee:</p>
+      <ul>
+        <li>A particular number of answered calls</li>
+        <li>Appointments</li>
+        <li>Leads</li>
+        <li>Customers</li>
+        <li>Revenue</li>
+        <li>Sales</li>
+        <li>Conversion rates</li>
+        <li>Calling productivity</li>
+        <li>Business results</li>
+      </ul>
+      <p>
+        Results depend on factors outside our control, including your lead list, offer, sales skills, calling frequency,
+        market, prospects, carrier and business practices.
+      </p>
+      <p>DailyDialz won't kill the fear.</p>
+      <p>It'll get you to the call faster.</p>
+      <p>What happens after that is up to you.</p>
+
+      <h2>18. Intellectual Property</h2>
+      <p>
+        DailyDialz, Dimension Seven Systems and their associated software, branding, interfaces, designs, graphics, text,
+        documentation and technology are owned by Dimension Seven Systems or its applicable licensors and are protected by
+        applicable intellectual-property laws.
+      </p>
+      <p>
+        Except for the limited license expressly granted under these Terms, no ownership rights are transferred to you.
+      </p>
+      <p>
+        <strong class="font-semibold text-text">DailyDialz</strong> and associated branding may not be used in a way that
+        falsely suggests sponsorship, affiliation or endorsement by Dimension Seven Systems.
+      </p>
+
+      <h2>19. Feedback</h2>
+      <p>
+        If you voluntarily provide suggestions, ideas or feedback concerning DailyDialz, you grant Dimension Seven Systems
+        permission to use that feedback to improve or develop its products without an obligation to compensate you.
+      </p>
+      <p>
+        This does not give Dimension Seven Systems ownership of your lead lists, customer information or other business data.
+      </p>
+
+      <h2>20. Privacy</h2>
+      <p>
+        Your use of DailyDialz is also governed by the{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/privacy"
+          >DailyDialz Privacy Policy</a
+        >.
+      </p>
+      <p>
+        The Privacy Policy explains how Dimension Seven Systems accesses, uses, stores and handles information associated
+        with DailyDialz.
+      </p>
+
+      <h2>21. Account and License Security</h2>
+      <p>
+        You are responsible for protecting any account credentials, activation information or license credentials associated
+        with DailyDialz.
+      </p>
+      <p>You may not knowingly allow unauthorized people to use your credentials or license.</p>
+      <p>If you believe your account or license has been compromised, contact us.</p>
+
+      <h2>22. Suspension or Termination</h2>
+      <p>
+        Dimension Seven Systems may suspend or terminate a license or access to DailyDialz when reasonably necessary because
+        of:
+      </p>
+      <ul>
+        <li>Fraud</li>
+        <li>Payment fraud</li>
+        <li>Chargeback abuse</li>
+        <li>Unauthorized license sharing</li>
+        <li>Circumvention of licensing controls</li>
+        <li>Security threats</li>
+        <li>Material violation of these Terms</li>
+        <li>Unlawful use of DailyDialz</li>
+        <li>Attempts to damage or interfere with DailyDialz or its infrastructure</li>
+      </ul>
+      <p>
+        Where reasonable under the circumstances, we may provide notice and an opportunity to correct a violation.
+      </p>
+      <p>Termination does not eliminate obligations or liabilities that arose before termination.</p>
+
+      <h2>23. Disclaimer of Warranties</h2>
+      <p>
+        <strong class="font-semibold text-text">
+          EXCEPT FOR THE EXPRESS 14-DAY MONEY-BACK GUARANTEE AND TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW,
+          DAILYDIALZ IS PROVIDED "AS IS" AND "AS AVAILABLE."
+        </strong>
+      </p>
+      <p>
+        <strong class="font-semibold text-text">
+          DIMENSION SEVEN SYSTEMS DISCLAIMS ALL WARRANTIES NOT EXPRESSLY PROVIDED IN THESE TERMS, INCLUDING IMPLIED
+          WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, TO THE EXTENT SUCH
+          WARRANTIES MAY LAWFULLY BE DISCLAIMED.
+        </strong>
+      </p>
+      <p>We do not warrant that DailyDialz will:</p>
+      <ul>
+        <li>Be uninterrupted</li>
+        <li>Be completely error-free</li>
+        <li>Work with every device</li>
+        <li>Work with every carrier</li>
+        <li>Remain compatible with every future operating-system version</li>
+        <li>Meet every user's requirements</li>
+        <li>Generate any particular business result</li>
+      </ul>
+      <p>
+        Some jurisdictions do not permit certain warranty exclusions, so some of these exclusions may not apply to you.
+      </p>
+      <p>
+        Nothing in these Terms excludes warranties, rights or remedies that applicable law does not permit us to exclude.
+      </p>
+
+      <h2>24. Limitation of Liability</h2>
+      <p>
+        <strong class="font-semibold text-text">
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, DIMENSION SEVEN SYSTEMS WILL NOT BE LIABLE FOR INDIRECT,
+          INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE OR CONSEQUENTIAL DAMAGES ARISING FROM OR RELATED TO DAILYDIALZ.
+        </strong>
+      </p>
+      <p>This includes, where legally permitted, losses involving:</p>
+      <ul>
+        <li>Lost profits</li>
+        <li>Lost business</li>
+        <li>Lost opportunities</li>
+        <li>Lost leads</li>
+        <li>Lost data</li>
+        <li>Business interruption</li>
+        <li>Carrier charges</li>
+        <li>Third-party service failures</li>
+        <li>Failure to reach a prospect</li>
+        <li>Regulatory consequences resulting from your calling activities</li>
+      </ul>
+      <p>
+        <strong class="font-semibold text-text">
+          TO THE MAXIMUM EXTENT PERMITTED BY LAW, DIMENSION SEVEN SYSTEMS' TOTAL LIABILITY ARISING OUT OF OR RELATING TO
+          YOUR PURCHASE OR USE OF DAILYDIALZ WILL NOT EXCEED THE AMOUNT YOU PAID TO DIMENSION SEVEN SYSTEMS FOR THE
+          DAILYDIALZ LICENSE GIVING RISE TO THE CLAIM.
+        </strong>
+      </p>
+      <p>
+        Some jurisdictions do not allow certain limitations of liability, so these limitations apply only to the extent
+        permitted by applicable law.
+      </p>
+      <p>Nothing in these Terms limits liability that cannot lawfully be limited.</p>
+
+      <h2>25. Indemnification</h2>
+      <p>
+        To the extent permitted by applicable law, you agree to defend, indemnify and hold harmless Dimension Seven Systems
+        and its owners, employees, contractors and agents from third-party claims, damages, liabilities, penalties, costs or
+        expenses arising from:
+      </p>
+      <ul>
+        <li>Your unlawful use of DailyDialz</li>
+        <li>Your calling activities</li>
+        <li>Your violation of telemarketing or communications laws</li>
+        <li>Your violation of privacy or data-protection laws</li>
+        <li>Your lead lists or the manner in which you obtained them</li>
+        <li>Your violation of another person's rights</li>
+        <li>Your material violation of these Terms</li>
+      </ul>
+      <p>
+        This section does not require indemnification to the extent a claim was caused by Dimension Seven Systems' own
+        conduct where applicable law does not permit such indemnification.
+      </p>
+
+      <h2>26. Governing Law</h2>
+      <p>
+        These Terms will be governed by the laws of the State of{" "}
+        <strong class="font-semibold text-text">[STATE]</strong>, without regard to conflict-of-law principles, except where
+        applicable consumer law requires otherwise.
+      </p>
+      <p>
+        Any dispute that is not otherwise resolved between the parties will be brought in a court of competent jurisdiction
+        located in <strong class="font-semibold text-text">[COUNTY, STATE]</strong>, unless applicable law gives you the
+        right to bring the matter elsewhere.
+      </p>
+
+      <h2>27. No Waiver</h2>
+      <p>
+        If Dimension Seven Systems does not immediately enforce a provision of these Terms, that does not mean we waive the
+        right to enforce it later.
+      </p>
+
+      <h2>28. Severability</h2>
+      <p>
+        If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will continue in
+        effect to the fullest extent permitted by law.
+      </p>
+
+      <h2>29. Entire Agreement</h2>
+      <p>
+        These Terms, together with the{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/privacy"
+          >DailyDialz Privacy Policy</a
+        >,{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/refund">Refund Policy</a>
+        , and any specific written terms presented with your purchase, constitute the agreement between you and Dimension
+        Seven Systems concerning your use of DailyDialz.
+      </p>
+      <p>
+        If specific written offer terms conflict with these general Terms, the more specific terms will control for that
+        offer unless otherwise stated.
+      </p>
+
+      <h2>30. Changes to These Terms</h2>
+      <p>
+        We may update these Terms as DailyDialz evolves or when legal, technical or business requirements change.
+      </p>
+      <p>
+        When we make material changes, we will update the effective date and provide additional notice when reasonably
+        appropriate.
+      </p>
+      <p>Changes will apply prospectively unless applicable law permits otherwise.</p>
+
+      <h2>31. Contact</h2>
+      <p>DailyDialz is operated by:</p>
+      <p>
+        <strong class="font-semibold text-text">Dimension Seven Systems</strong><br />
+        DailyDialz
+      </p>
+      <p>
+        <strong class="font-semibold text-text">Email:</strong>{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href={`mailto:${site.email}`}
+          >{site.email}</a
+        >
+      </p>
+      <p>
+        <strong class="font-semibold text-text">Website:</strong>{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href={site.url}>{site.url}</a>
       </p>
     </article>
   </section>
-  <CtaBand />
 </BaseLayout>

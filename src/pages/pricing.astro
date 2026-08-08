@@ -24,7 +24,7 @@ const offerLd = {
   title="Pricing"
   description={`DailyDialz founder license: ${site.priceLabel} one time. Use your existing mobile number. No monthly subscription.`}
   jsonLd={offerLd}
-  showAnnouncement
+  hideNav
 >
   <PageHero
     label="FOUNDER LICENSE"
@@ -55,7 +55,9 @@ const offerLd = {
           }
         </ul>
         <a href={site.checkoutUrl} class="btn-primary mt-10 w-full">Get DailyDialz Solo — {site.priceLabel}</a>
-        <p class="mt-4 text-center text-sm text-text-muted">One payment of {site.priceLabel}. Checkout link will be connected at launch.</p>
+        <p class="mt-4 text-center text-sm text-text-muted">
+          One payment of {site.priceLabel}. Pay with card (Stripe) or PayPal.
+        </p>
       </div>
     </div>
   </section>

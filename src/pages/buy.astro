@@ -1,0 +1,414 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { priceIncludesShort, site, soloIncludes } from "../data/site";
+
+const pageTitle = "Buy DailyDialz";
+const pageDescription = `Get ${site.productName} for ${site.priceLabel} one time. Pay with card (Stripe) or PayPal. ${site.refundDays}-day money-back guarantee.`;
+
+const offerLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: site.productName,
+  description: site.description,
+  brand: { "@type": "Brand", name: site.name },
+  offers: {
+    "@type": "Offer",
+    price: String(site.price),
+    priceCurrency: site.priceCurrency,
+    availability: "https://schema.org/InStock",
+    url: new URL("/buy", site.url).href,
+  },
+};
+
+const includes = soloIncludes;
+const stripeReady = Boolean(site.stripePaymentLink);
+const paypalReady = Boolean(site.paypalPaymentLink);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/buy"
+  jsonLd={offerLd}
+  landing
+>
+  <!-- Minimal top bar -->
+  <div class="border-b border-border bg-bg/95 px-4 py-3 sm:px-6">
+    <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-4">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary no-underline transition-colors hover:text-text"
+      >
+        <span aria-hidden="true">←</span>
+        Back to DailyDialz
+      </a>
+      <p class="hidden font-mono text-[11px] tracking-[0.06em] text-accent uppercase sm:block">
+        Secure checkout · {site.priceLabel} one time
+      </p>
+    </div>
+  </div>
+
+  <section class="relative overflow-hidden border-b border-border">
+    <div class="pointer-events-none absolute inset-0 gradient-wash opacity-60" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1100px] px-4 py-12 sm:px-6 sm:py-16">
+      <div class="text-center">
+        <p class="mono-label">
+          <span class="text-text">Confidence doesn’t come before the first call.</span>
+          {" "}
+          <span class="text-accent">It comes after.</span>
+        </p>
+        <h1
+          class="mt-3 text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-tight text-text"
+        >
+          Get {site.name}.{" "}
+          <span class="block text-accent sm:inline">Pay once. Keep calling.</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-[40ch] text-base leading-relaxed text-text-secondary sm:max-w-[48ch] sm:text-lg">
+          Three steps from this page to your first call. Use the phone and leads you already have.
+        </p>
+        <p class="mx-auto mt-2 max-w-none text-base leading-relaxed text-text-secondary sm:text-lg">
+          14 day money back guarantee
+        </p>
+      </div>
+
+      <!-- Checkout grid -->
+      <div class="mx-auto mt-12 grid max-w-[960px] items-start gap-6 lg:grid-cols-[1fr_1.05fr]">
+        <!-- Order summary -->
+        <aside class="card overflow-hidden p-0 lg:sticky lg:top-6">
+          <div class="border-b border-border bg-accent px-6 py-7 text-bg sm:px-8">
+            <p class="font-mono text-xs font-medium tracking-[0.08em] uppercase opacity-80">
+              Time to first call
+            </p>
+            <p class="mt-2 font-mono text-[clamp(2.75rem,7vw,3.75rem)] font-bold leading-none tabular-nums">
+              60 secs
+            </p>
+            <p class="mt-3 text-sm font-medium leading-snug opacity-90">
+              From install to your first call using the phone, number, and leads you already have.
+            </p>
+          </div>
+          <div class="px-6 py-7 sm:px-8">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="mono-label">FOUNDER LICENSE</p>
+                <p class="mt-1 text-xl font-bold text-text">{site.productName}</p>
+              </div>
+              <div class="text-right">
+                <p class="text-[40px] font-bold leading-none tabular-nums tracking-tight text-accent">
+                  {site.priceLabel}
+                </p>
+                <p class="mt-1 text-sm text-text-secondary">one time</p>
+              </div>
+            </div>
+
+            <ul class="mt-6 space-y-2.5 border-t border-border pt-6">
+              {
+                priceIncludesShort.map((item) => (
+                  <li class="flex gap-2.5 text-sm text-text-secondary">
+                    <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div class="mt-6 flex items-start gap-3 rounded border border-border bg-bg px-4 py-3">
+              <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path
+                    d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-semibold text-text">{site.refundDays}-day money-back guarantee</p>
+                <p class="mt-0.5 text-sm text-text-secondary">
+                  If it doesn’t make it easier to start calling and keep calling, get your money back.
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Payment panel -->
+        <div class="card p-6 sm:p-8" id="checkout">
+          <h2 class="text-2xl font-bold text-text">Complete your purchase</h2>
+          <p class="mt-2 text-sm leading-relaxed text-text-secondary">
+            We’ll use your email to send install instructions and your license details after payment.
+          </p>
+
+          {
+            Astro.url.searchParams.get("canceled") === "1" && (
+              <div
+                class="mt-5 rounded border border-border bg-bg px-4 py-3 text-sm text-text-secondary"
+                role="status"
+              >
+                Checkout was canceled. No charge was made — pick a payment method when you’re ready.
+              </div>
+            )
+          }
+
+          <form id="buy-form" class="mt-6 space-y-5" novalidate>
+            <div>
+              <label for="buyer-email" class="block text-sm font-medium text-text">
+                Email <span class="text-accent">*</span>
+              </label>
+              <input
+                id="buyer-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                inputmode="email"
+                placeholder="you@company.com"
+                class="mt-2 w-full rounded border border-border bg-bg px-4 py-3 text-base text-text placeholder:text-text-muted outline-none transition focus:border-accent/60"
+              />
+              <p id="email-error" class="mt-1.5 hidden text-sm text-red-400" role="alert"></p>
+              <p class="mt-1.5 text-xs text-text-muted">License delivery and receipt go here. No spam, ever.</p>
+            </div>
+
+            <div>
+              <label for="buyer-name" class="block text-sm font-medium text-text">
+                Name <span class="text-text-muted">(optional)</span>
+              </label>
+              <input
+                id="buyer-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Your name"
+                class="mt-2 w-full rounded border border-border bg-bg px-4 py-3 text-base text-text placeholder:text-text-muted outline-none transition focus:border-accent/60"
+              />
+            </div>
+
+            <!-- Order total -->
+            <div
+              class="flex items-center justify-between rounded border border-border bg-bg px-4 py-4"
+            >
+              <div>
+                <p class="text-sm text-text-secondary">Total due today</p>
+                <p class="mt-0.5 text-xs text-text-muted">No subscription · No auto-renew</p>
+              </div>
+              <p class="text-2xl font-bold tabular-nums text-text">{site.priceLabel}</p>
+            </div>
+
+            <fieldset class="space-y-3">
+              <legend class="text-sm font-medium text-text">Payment method</legend>
+
+              <!-- Stripe -->
+              <button
+                type="submit"
+                data-pay="stripe"
+                class:list={[
+                  "group flex w-full items-center gap-4 rounded border px-4 py-4 text-left transition",
+                  stripeReady
+                    ? "border-border bg-bg-secondary hover:border-accent/50"
+                    : "cursor-not-allowed border-border/60 bg-bg opacity-60",
+                ]}
+                disabled={!stripeReady}
+                aria-describedby={!stripeReady ? "stripe-unavailable" : undefined}
+              >
+                <span
+                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded bg-[#635BFF]/15 text-[#a5a0ff]"
+                  aria-hidden="true"
+                >
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305h.00z"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="block text-base font-semibold text-text">Pay with card</span>
+                  <span class="mt-0.5 block text-sm text-text-secondary">
+                    Secure checkout powered by Stripe
+                  </span>
+                </span>
+                <span class="shrink-0 font-mono text-xs text-accent" aria-hidden="true">→</span>
+              </button>
+              {
+                !stripeReady && (
+                  <p id="stripe-unavailable" class="px-1 text-xs text-text-muted">
+                    Stripe is not connected yet. Set{" "}
+                    <code class="font-mono text-text">PUBLIC_STRIPE_PAYMENT_LINK</code> before launch.
+                  </p>
+                )
+              }
+
+              <!-- PayPal -->
+              <button
+                type="submit"
+                data-pay="paypal"
+                class:list={[
+                  "group flex w-full items-center gap-4 rounded border px-4 py-4 text-left transition",
+                  paypalReady
+                    ? "border-border bg-bg-secondary hover:border-accent/50"
+                    : "cursor-not-allowed border-border/60 bg-bg opacity-60",
+                ]}
+                disabled={!paypalReady}
+                aria-describedby={!paypalReady ? "paypal-unavailable" : undefined}
+              >
+                <span
+                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded bg-[#0070BA]/15 text-[#5eb3f0]"
+                  aria-hidden="true"
+                >
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .76-.653h6.9c2.286 0 3.96.55 4.976 1.634.94 1.005 1.314 2.38 1.11 4.082-.012.1-.026.2-.042.3-.62 3.536-2.7 5.14-6.18 5.14h-1.82a.9.9 0 0 0-.889.76l-.75 4.76a.64.64 0 0 1-.633.554h.00zm9.45-13.16c-.06.36-.14.72-.25 1.1-.89 3.42-3.14 4.66-6.3 4.66H8.37l-.86 5.46h2.39c.41 0 .76-.3.82-.7l.03-.18.64-4.07.04-.23a.83.83 0 0 1 .82-.7h.52c3.35 0 5.97-1.36 6.74-5.29.32-1.64.15-3.01-.7-3.98a3.3 3.3 0 0 0-.3-.27c.39.94.45 1.94.2 3.2z"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="block text-base font-semibold text-text">Pay with PayPal</span>
+                  <span class="mt-0.5 block text-sm text-text-secondary">
+                    PayPal balance or linked cards
+                  </span>
+                </span>
+                <span class="shrink-0 font-mono text-xs text-accent" aria-hidden="true">→</span>
+              </button>
+              {
+                !paypalReady && (
+                  <p id="paypal-unavailable" class="px-1 text-xs text-text-muted">
+                    PayPal is not connected yet. Set{" "}
+                    <code class="font-mono text-text">PUBLIC_PAYPAL_PAYMENT_LINK</code> before launch.
+                  </p>
+                )
+              }
+            </fieldset>
+
+            <p class="text-center text-xs leading-relaxed text-text-muted">
+              By completing purchase you agree to the{" "}
+              <a href="/terms" class="underline decoration-border underline-offset-2 hover:text-accent">Terms</a>
+              {" "}and{" "}
+              <a href="/privacy" class="underline decoration-border underline-offset-2 hover:text-accent">Privacy Policy</a>.
+              Payments are processed by Stripe or PayPal.
+              <span class="mt-1 block">We never store your full card number.</span>
+            </p>
+          </form>
+
+          <div class="mt-6 border-t border-border pt-5">
+            <p class="mono-label">WHAT’S INCLUDED</p>
+            <ul class="mt-3 columns-1 gap-x-6 space-y-2 sm:columns-2">
+              {
+                includes.map((item) => (
+                  <li class="break-inside-avoid flex gap-2 text-sm text-text-secondary">
+                    <span class="shrink-0 text-accent" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script
+  define:vars={{
+    stripePaymentLink: site.stripePaymentLink,
+    paypalPaymentLink: site.paypalPaymentLink,
+    priceAmount: site.priceAmount,
+    productSku: site.productSku,
+  }}
+>
+  const STORAGE_KEY = "dailydialz_checkout";
+
+  const form = document.getElementById("buy-form");
+  const emailInput = document.getElementById("buyer-email");
+  const nameInput = document.getElementById("buyer-name");
+  const emailError = document.getElementById("email-error");
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function showEmailError(message) {
+    if (!emailError || !emailInput) return false;
+    emailError.textContent = message;
+    emailError.classList.remove("hidden");
+    emailInput.setAttribute("aria-invalid", "true");
+    emailInput.focus();
+    return false;
+  }
+
+  function clearEmailError() {
+    if (!emailError || !emailInput) return;
+    emailError.textContent = "";
+    emailError.classList.add("hidden");
+    emailInput.removeAttribute("aria-invalid");
+  }
+
+  function readBuyer() {
+    const email = (emailInput instanceof HTMLInputElement ? emailInput.value : "").trim();
+    const name = (nameInput instanceof HTMLInputElement ? nameInput.value : "").trim();
+    if (!email) {
+      showEmailError("Enter the email where we should send your license.");
+      return null;
+    }
+    if (!isValidEmail(email)) {
+      showEmailError("Enter a valid email address.");
+      return null;
+    }
+    clearEmailError();
+    return { email, name };
+  }
+
+  function persistBuyer(buyer, provider) {
+    try {
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          email: buyer.email,
+          name: buyer.name,
+          provider,
+          product: productSku,
+          amount: priceAmount,
+          startedAt: new Date().toISOString(),
+        }),
+      );
+    } catch {
+      /* private mode — continue without storage */
+    }
+  }
+
+  function startStripe(buyer) {
+    if (!stripePaymentLink) return;
+    persistBuyer(buyer, "stripe");
+
+    const url = new URL(stripePaymentLink);
+    url.searchParams.set("prefilled_email", buyer.email);
+    if (buyer.name) url.searchParams.set("prefilled_name", buyer.name);
+    url.searchParams.set("client_reference_id", buyer.email);
+    window.location.href = url.toString();
+  }
+
+  function startPayPal(buyer) {
+    if (!paypalPaymentLink) return;
+    persistBuyer(buyer, "paypal");
+    // PayPal No Code Payment links don't reliably support prefill query params —
+    // store buyer locally and send them to the hosted PayPal checkout.
+    window.location.href = paypalPaymentLink;
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const submitter = event.submitter;
+    const method =
+      submitter instanceof HTMLElement ? submitter.getAttribute("data-pay") : null;
+
+    const buyer = readBuyer();
+    if (!buyer) return;
+
+    if (method === "stripe") startStripe(buyer);
+    else if (method === "paypal") startPayPal(buyer);
+  });
+
+  emailInput?.addEventListener("input", clearEmailError);
+</script>

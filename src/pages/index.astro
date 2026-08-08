@@ -1,10 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TrustBar from "../components/TrustBar.astro";
-import CtaBand from "../components/CtaBand.astro";
-import SectionHeading from "../components/SectionHeading.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
-import { features, homeFaqs, site, useCases } from "../data/site";
+import {
+  getSteps,
+  homeFaqs,
+  notForYou,
+  planSteps,
+  priceIncludesShort,
+  priceValuePoints,
+  site,
+  worksWellIf,
+} from "../data/site";
 
 const softwareLd = {
   "@context": "https://schema.org",
@@ -30,208 +36,178 @@ const faqLd = {
   })),
 };
 
-const steps = [
-  { n: "01", title: "Use your phone", body: "Your existing compatible mobile number—no separate DailyDialz number required for the standard workflow." },
-  { n: "02", title: "Upload your list", body: "Import a CSV lead list and map the phone column. Extra columns stay available as context." },
-  { n: "03", title: "Review & tap", body: "See the next contact, launch the call without typing ten digits, then hang up when done." },
-  { n: "04", title: "Record & continue", body: "Mark the outcome, add a note if needed, and move to the next lead without losing your place." },
-];
-
-const oldWay = [
-  "Buy another phone number",
-  "Create another telecom account",
-  "Submit business information",
-  "Wait for verification",
-  "Configure everything",
-  "Open the spreadsheet",
-  "Copy the number",
-  "Type it into the phone",
-  "Update the row",
-  "Repeat until focus is gone",
-];
-
-const newWay = [
-  "Use your existing mobile number",
-  "Upload the list",
-  "Review the lead",
-  "Tap to call",
-  "Record the outcome",
-  "Continue",
-];
+const ctaLabel = "GET DAILYDIALZ · $99 ONE TIME";
+const ctaHref = site.checkoutUrl;
 ---
 
 <BaseLayout
-  title={`${site.name} · Cold calling for solo operators`}
+  title={`${site.name} · Your leads are waiting. Start calling.`}
   description={site.description}
   jsonLd={[softwareLd, faqLd]}
-  showAnnouncement
+  navCenterText="$99 Founder Pricing · 60 seconds to your first call · Use your own phone number"
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
+  {/* ═══════════════════════════════════════════
+      HERO — open the sales letter
+  ═══════════════════════════════════════════ */}
+  <section class="relative overflow-hidden border-b border-border">
     <div class="pointer-events-none absolute inset-0 gradient-wash opacity-80" aria-hidden="true"></div>
-    <div class="relative mx-auto flex min-h-[85vh] max-w-[900px] flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-      <p class="mono-label">COLD CALLING FOR SOLO OPERATORS</p>
-      <h1 class="mt-5 text-[48px] font-bold leading-[1.0] tracking-tight text-text sm:text-[72px] lg:text-[96px]">
-        Use the phone number you already have.
+    <div
+      class="relative mx-auto flex min-h-[min(88vh,920px)] max-w-[1100px] flex-col items-center justify-center px-4 py-20 text-center sm:px-6 sm:py-24"
+    >
+      <h1
+        class="max-w-[18ch] text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[1.02] tracking-tight text-text sm:max-w-[22ch] lg:max-w-none"
+      >
+        Stop getting ready. <span class="text-accent">Start calling.</span>
       </h1>
-      <p class="mx-auto mt-6 max-w-[640px] text-lg leading-relaxed text-text-secondary sm:text-xl">
-        DailyDialz turns your spreadsheet into a simple mobile calling workflow—without forcing you to purchase,
-        configure, and verify another Twilio-style business number.
+      <p class="mx-auto mt-6 max-w-[560px] text-lg font-bold leading-relaxed text-text sm:text-xl">
+        From install to your first call <span class="text-accent">in just 60 seconds.</span>
       </p>
-      <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-        <a href="/pricing" class="btn-primary">Get DailyDialz — {site.priceLabel} once</a>
-        <a href="/how-it-works" class="btn-ghost">See how it works →</a>
+
+      {/* Product / founder video — demonstration opener */}
+      <div class="card mt-12 w-full max-w-[720px] overflow-hidden p-0">
+        {
+          site.founderVideoEmbedUrl || site.productDemoEmbedUrl ? (
+            <div class="relative aspect-video w-full bg-bg-secondary">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src={site.productDemoEmbedUrl || site.founderVideoEmbedUrl}
+                title="DailyDialz demo — see why getting started is the hardest part"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div class="relative flex aspect-video w-full flex-col items-center justify-center gap-4 bg-bg-secondary px-6 text-center">
+              <div
+                class="flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent sm:h-20 sm:w-20"
+                aria-hidden="true"
+              >
+                <svg class="ml-1 h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7L8 5z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-mono text-xs tracking-[0.06em] text-accent uppercase">5-minute sales video</p>
+                <p class="mt-2 text-xl font-semibold text-text sm:text-2xl">See why getting started is the hardest part</p>
+                <p class="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-secondary">
+                  Drop your YouTube or Vimeo embed URL into{" "}
+                  <span class="font-mono text-text">site.founderVideoEmbedUrl</span> to go live.
+                </p>
+              </div>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="mt-10 flex w-full max-w-[360px] flex-col items-stretch gap-4 sm:max-w-none sm:flex-row sm:items-center sm:justify-center">
+        <a href={ctaHref} class="btn-primary w-full sm:w-auto">GET DAILYDIALZ · $99 ONE TIME</a>
       </div>
       <p class="mt-5 text-sm text-text-muted">
-        No monthly subscription. No separate calling number required for the standard mobile workflow.
+        14-day money-back guarantee
       </p>
+    </div>
+  </section>
 
-      <div class="mt-14 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
-        {
-          [
-            { k: "Setup", v: "Your number" },
-            { k: "Workflow", v: "Upload · Tap · Continue" },
-            { k: "Price", v: `${site.priceLabel} once` },
-          ].map((m) => (
-            <div class="card px-5 py-5 text-left">
-              <p class="font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">{m.k}</p>
-              <p class="mt-2 text-xl font-semibold text-text">{m.v}</p>
-            </div>
-          ))
-        }
+  {/* ═══════════════════════════════════════════
+      CH1 — DEMONSTRATION / OUTCOME
+      Visual problem or outcome (before → after)
+  ═══════════════════════════════════════════ */}
+  <section id="demonstration" class="scroll-mt-24 overflow-x-hidden border-b border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
+    <div class="mx-auto grid max-w-[1100px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-text">
+          Your first call.
+          <span class="mt-1 block text-accent">60 seconds from now.</span>
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-text-secondary">
+          No buying a new number. No business license verification. No rebuilding your pipeline in someone else’s CRM.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-text-secondary">
+          Connect your sheet. See the next lead. Tap to call.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-text-secondary">
+          Use the phone and number you have in your hand right now.
+        </p>
       </div>
-    </div>
-  </section>
 
-  <TrustBar />
-
-  <!-- Proof strip -->
-  <section class="border-b border-border bg-bg px-4 py-8 sm:px-6">
-    <div class="mx-auto flex max-w-[1100px] flex-wrap items-center justify-center gap-x-6 gap-y-3 text-center">
-      {
-        ["Use your existing mobile number", "No separate number setup", "Upload your lead list", "Tap to call", "Pay once"].map(
-          (t) => (
-            <span class="text-sm font-medium text-text-secondary">{t}</span>
-          ),
-        )
-      }
-    </div>
-  </section>
-
-  <!-- Two problems -->
-  <section class="bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[1100px]">
-      <SectionHeading
-        label="THE TWO PROBLEMS"
-        title="Why does basic cold calling require so much setup?"
-        subtitle="Most calling platforms create friction before you make a single call—then more friction every day after."
-      />
-      <div class="mt-12 grid gap-6 lg:grid-cols-2">
-        <div class="card p-8">
-          <p class="mono-label">BEFORE YOU START</p>
-          <h3 class="mt-3 text-[28px] font-semibold leading-tight text-text">First they make you prove you’re a business.</h3>
-          <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
-            Buy another number. Create another account. Submit business information. Complete identity or business
-            verification. Wait for approval. Configure call settings. Figure out messaging and carrier requirements.
-          </p>
-          <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
-            If you’re a solo founder without an ops person, the setup can become a bigger project than the calling itself.
-          </p>
-        </div>
-        <div class="card p-8">
-          <p class="mono-label">EVERY DAY AFTERWARD</p>
-          <h3 class="mt-3 text-[28px] font-semibold leading-tight text-text">Then they make you fight the software.</h3>
-          <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
-            Open the spreadsheet. Find the next lead. Switch apps. Type the number. Check the number. Make the call.
-            Return to the spreadsheet. Mark the result. Repeat until your focus is gone.
-          </p>
-          <p class="mt-4 text-[15px] leading-relaxed text-text-secondary">
-            DailyDialz attacks both problems: less unnecessary setup at the start, less repetitive work every day after.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features bento -->
-  <section class="border-t border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[1100px]">
-      <SectionHeading label="WHAT YOU GET" title="From spreadsheet to first conversation." />
-      <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <a
-          href={`/features/${features[0].slug}`}
-          class="card group flex flex-col p-8 no-underline transition hover:border-accent/30 md:col-span-2 lg:row-span-2 lg:min-h-[360px]"
+      {/* Phone mockup — outcome visual */}
+      <div class="relative mx-auto w-full max-w-[300px]">
+        <div
+          class="pointer-events-none absolute -inset-8 rounded-full bg-accent/15 blur-3xl"
+          aria-hidden="true"
         >
-          <p class="mono-label">{features[0].eyebrow}</p>
-          <h3 class="mt-4 text-[30px] font-semibold text-text">{features[0].title}</h3>
-          <p class="mt-4 max-w-xl flex-1 text-[16px] leading-relaxed text-text-secondary">{features[0].short}</p>
-          <span class="mt-6 text-sm font-medium text-accent group-hover:underline">Learn more →</span>
-        </a>
-        {
-          features.slice(1).map((f) => (
-            <a
-              href={`/features/${f.slug}`}
-              class="card group flex flex-col p-7 no-underline transition hover:border-accent/30"
-            >
-              <p class="mono-label">{f.eyebrow}</p>
-              <h3 class="mt-3 text-[22px] font-semibold text-text sm:text-[24px]">{f.title}</h3>
-              <p class="mt-3 flex-1 text-[15px] leading-relaxed text-text-secondary">{f.short}</p>
-              <span class="mt-5 text-sm font-medium text-accent group-hover:underline">Learn more →</span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="border-t border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[1100px]">
-      <SectionHeading label="PROCESS" title="Upload. Tap. Talk. Continue." subtitle="Simple enough to use today." />
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          steps.map((s) => (
-            <div class="card p-6">
-              <p class="font-mono text-sm text-accent">{s.n}</p>
-              <h3 class="mt-3 text-xl font-semibold text-text">{s.title}</h3>
-              <p class="mt-3 text-[15px] leading-relaxed text-text-secondary">{s.body}</p>
-            </div>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-center">
-        <a href="/how-it-works" class="btn-ghost">Full walkthrough →</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- Before / after -->
-  <section class="border-t border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[1100px]">
-      <SectionHeading label="BEFORE AND AFTER" title="The old way vs the DailyDialz way." />
-      <div class="mt-12 grid gap-6 lg:grid-cols-2">
-        <div class="card p-8">
-          <p class="mono-label !text-text-muted">THE OLD WAY</p>
-          <ul class="mt-6 space-y-3">
-            {
-              oldWay.map((item) => (
-                <li class="flex gap-3 text-[15px] text-text-secondary">
-                  <span class="text-text-muted" aria-hidden="true">
-                    –
-                  </span>
-                  {item}
-                </li>
-              ))
-            }
-          </ul>
         </div>
-        <div class="card border-accent/25 p-8">
-          <p class="mono-label">THE DAILYDIALZ WAY</p>
+        <div
+          class="relative overflow-hidden rounded-[2rem] border border-border bg-bg-secondary shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_24px_80px_rgba(0,0,0,0.45)]"
+        >
+          <div class="flex items-center justify-center border-b border-border px-4 py-3">
+            <span class="h-1.5 w-16 rounded-full bg-text-muted/40" aria-hidden="true"></span>
+          </div>
+          <div class="px-5 pb-8 pt-6">
+            <p class="text-center font-mono text-[10px] tracking-[0.08em] text-text-muted uppercase">Call session</p>
+            <p class="mt-6 text-center text-xs text-text-secondary">Next up</p>
+            <p class="mt-1 text-center text-2xl font-semibold text-text">Marcus Bell</p>
+            <p class="mt-1 text-center font-mono text-sm text-text-secondary">(555) 014-8821</p>
+            <p class="mt-1 text-center text-xs text-text-muted">Northline Agency · Open house</p>
+            <div class="mt-8 flex justify-center">
+              <div
+                class="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-bg shadow-[0_0_32px_rgba(180,255,57,0.35)]"
+                aria-hidden="true"
+              >
+                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-4 text-center font-mono text-xs font-medium tracking-[0.06em] text-accent uppercase">
+              Tap to call
+            </p>
+            <div class="mt-8 grid grid-cols-3 gap-2 text-center">
+              <div class="rounded border border-border px-2 py-2">
+                <p class="font-mono text-lg font-semibold tabular-nums text-text">12</p>
+                <p class="text-[10px] text-text-muted">left</p>
+              </div>
+              <div class="rounded border border-border px-2 py-2">
+                <p class="font-mono text-lg font-semibold tabular-nums text-text">8</p>
+                <p class="text-[10px] text-text-muted">done</p>
+              </div>
+              <div class="rounded border border-border px-2 py-2">
+                <p class="font-mono text-lg font-semibold tabular-nums text-accent">1</p>
+                <p class="text-[10px] text-text-muted">hot</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ═══════════════════════════════════════════
+      CH2 — QUALIFICATION
+      “Works well if…” / not for you
+  ═══════════════════════════════════════════ */}
+  <section id="qualification" class="scroll-mt-24 border-b border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="mx-auto max-w-[1100px] text-center">
+        <h2 class="mx-auto max-w-[20ch] text-center text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-text sm:max-w-[28ch] lg:max-w-none">
+          Built for you. <span class="text-accent">And the calls you need to make.</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-[800px] text-lg leading-relaxed text-text-secondary">
+          If you’re making the calls from leads in your spreadsheet and you want less crap between you and the next dial, DailyDialz just might be for you.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-4 lg:grid-cols-2">
+        <div class="card border-accent/25 p-7 sm:p-8">
+          <p class="mono-label !text-[16px]">WORKS WELL IF…</p>
           <ul class="mt-6 space-y-3">
             {
-              newWay.map((item) => (
-                <li class="flex gap-3 text-[15px] text-text">
-                  <span class="text-accent" aria-hidden="true">
+              worksWellIf.map((item) => (
+                <li class="flex gap-3 text-[15px] leading-snug text-text">
+                  <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
                     +
                   </span>
                   {item}
@@ -240,111 +216,396 @@ const newWay = [
             }
           </ul>
         </div>
+        <div class="card p-7 sm:p-8">
+          <p class="mono-label !text-[16px] !text-text-muted">NOT FOR YOU IF…</p>
+          <ul class="mt-6 space-y-3">
+            {
+              notForYou.map((item) => (
+                <li class="flex gap-3 text-[15px] leading-snug text-text-secondary">
+                  <span class="mt-0.5 shrink-0 text-text-muted" aria-hidden="true">
+                    –
+                  </span>
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
+
+      <p class="mx-auto mt-10 max-w-[40ch] text-center text-[18px] font-bold leading-relaxed text-text sm:max-w-none">
+        If you’re the one making the calls, you’re exactly who this is for.
+      </p>
     </div>
   </section>
 
-  <!-- Use cases -->
-  <section class="border-t border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
+  {/* ═══════════════════════════════════════════
+      CH3 — THE PLAN (60–70% of the page)
+      3–5 steps · show the thing is real
+  ═══════════════════════════════════════════ */}
+  <section id="plan" class="scroll-mt-24 border-b border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
     <div class="mx-auto max-w-[1100px]">
-      <SectionHeading
-        label="WHO IT’S FOR"
-        title="Built for people who sell by themselves."
-        subtitle="If your leads live in a spreadsheet and you call from your mobile phone, DailyDialz was built around the way you already work."
-      />
-      <div class="mt-12 grid gap-4 sm:grid-cols-2">
+      <div class="mx-auto max-w-[1100px] text-center">
+        <h2 class="mx-auto max-w-[18ch] text-center text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-text sm:max-w-[24ch] lg:max-w-none">
+          Four easy steps. <span class="text-accent">Then just do it again.</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-[800px] text-lg leading-relaxed text-text-secondary">
+          Preview the lead. Make the call. Log the result. Move to the next one.
+        </p>
+      </div>
+
+      <div class="mt-16 space-y-16 sm:space-y-24">
         {
-          useCases.map((u) => (
-            <a href={`/use-cases/${u.slug}`} class="card group p-7 no-underline transition hover:border-accent/30">
-              <h3 class="text-[22px] font-semibold text-text">{u.title}</h3>
-              <p class="mt-3 text-[15px] leading-relaxed text-text-secondary">{u.short}</p>
-              <span class="mt-5 inline-block text-sm font-medium text-accent group-hover:underline">View use case →</span>
-            </a>
-          ))
+          planSteps.map((step, i) => {
+            const reverse = i % 2 === 1;
+            return (
+              <div
+                class:list={[
+                  "grid items-center gap-8 lg:grid-cols-2 lg:gap-14",
+                  reverse && "lg:[&>*:first-child]:order-2",
+                ]}
+              >
+                <div>
+                  <p class="font-mono text-sm text-accent">{step.n}</p>
+                  <h3 class="mt-2 text-[28px] font-semibold leading-tight text-text sm:text-[32px]">{step.title}</h3>
+                  <p class="mt-4 max-w-md text-[16px] leading-relaxed text-text-secondary">{step.body}</p>
+                </div>
+
+                {/* UI proof cards — show the thing is real */}
+                <div class="card overflow-hidden p-0">
+                  {step.ui === "sheet" && (
+                    <div class="bg-bg-secondary p-5 sm:p-6">
+                      <div class="flex items-center justify-between border-b border-border pb-3">
+                        <p class="font-mono text-[11px] tracking-[0.06em] text-accent uppercase">Lead source</p>
+                        <span class="rounded bg-accent/15 px-2 py-0.5 font-mono text-[10px] text-accent">Connected</span>
+                      </div>
+                      <div class="mt-4 space-y-2">
+                        {[
+                          { name: "Q3 Prospects", rows: "84 rows", active: true },
+                          { name: "Open house · Sat", rows: "31 rows", active: false },
+                          { name: "Warm follow-ups", rows: "12 rows", active: false },
+                        ].map((sheet) => (
+                          <div
+                            class:list={[
+                              "flex items-center justify-between rounded border px-3 py-3",
+                              sheet.active ? "border-accent/40 bg-accent/5" : "border-border",
+                            ]}
+                          >
+                            <div>
+                              <p class="text-sm font-medium text-text">{sheet.name}</p>
+                              <p class="mt-0.5 font-mono text-[11px] text-text-muted">{sheet.rows}</p>
+                            </div>
+                            {sheet.active && (
+                              <span class="font-mono text-[10px] tracking-wide text-accent uppercase">Selected</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <div class="mt-4 rounded border border-border bg-bg px-3 py-2.5">
+                        <p class="font-mono text-[10px] text-text-muted uppercase">Phone column</p>
+                        <p class="mt-1 text-sm text-text">mobile · auto-detected</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {step.ui === "lead" && (
+                    <div class="bg-bg-secondary p-5 sm:p-6">
+                      <p class="font-mono text-[11px] tracking-[0.06em] text-accent uppercase">Next lead</p>
+                      <p class="mt-4 text-2xl font-semibold text-text">Allison Reed</p>
+                      <p class="mt-1 font-mono text-base text-text-secondary">(555) 019-4402</p>
+                      <dl class="mt-6 space-y-2.5 text-sm">
+                        {[
+                          ["Company", "Reed & Co."],
+                          ["Source", "Google Sheet · Q3 Prospects"],
+                          ["Note", "Asked for pricing last week"],
+                          ["Last result", "—"],
+                        ].map(([k, v]) => (
+                          <div class="flex justify-between gap-4 border-b border-border pb-2 last:border-0">
+                            <dt class="text-text-muted">{k}</dt>
+                            <dd class="text-right text-text">{v}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  )}
+
+                  {step.ui === "call" && (
+                    <div class="flex min-h-[280px] flex-col items-center justify-center bg-bg px-6 py-10 text-center">
+                      <p class="font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">Calling</p>
+                      <p class="mt-4 text-2xl font-semibold text-text">Marcus Bell</p>
+                      <p class="mt-1 font-mono text-sm text-text-secondary">(555) 014-8821</p>
+                      <div
+                        class="mt-8 flex h-16 w-16 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"
+                        aria-hidden="true"
+                      >
+                        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+                          <path
+                            d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"
+                          />
+                        </svg>
+                      </div>
+                      <p class="mt-4 font-mono text-xs text-accent">Via your existing number</p>
+                      <div class="mt-8 flex gap-3">
+                        <span class="rounded border border-border px-4 py-2 text-xs text-text-muted">Mute</span>
+                        <span class="rounded bg-red-500/90 px-4 py-2 text-xs font-medium text-white">End</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {step.ui === "outcome" && (
+                    <div class="bg-bg-secondary p-5 sm:p-6">
+                      <p class="font-mono text-[11px] tracking-[0.06em] text-accent uppercase">Log outcome</p>
+                      <p class="mt-3 text-lg font-semibold text-text">What happened?</p>
+                      <div class="mt-4 grid grid-cols-2 gap-2">
+                        {["No Answer", "Voicemail", "Interested", "Callback", "DNC", "Wrong number"].map((label, idx) => (
+                          <span
+                            class:list={[
+                              "rounded border px-3 py-2.5 text-center text-sm",
+                              idx === 2
+                                ? "border-accent bg-accent font-semibold text-bg"
+                                : "border-border text-text-secondary",
+                            ]}
+                          >
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                      <div class="mt-4 rounded border border-border bg-bg px-3 py-3">
+                        <p class="font-mono text-[10px] text-text-muted uppercase">Note (optional)</p>
+                        <p class="mt-1 text-sm text-text-secondary">Wants a demo Thursday AM…</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {step.ui === "next" && (
+                    <div class="bg-bg-secondary p-5 sm:p-6">
+                      <div class="flex items-center justify-between">
+                        <p class="font-mono text-[11px] tracking-[0.06em] text-accent uppercase">Queue</p>
+                        <span class="font-mono text-[11px] text-text-muted">9 of 84</span>
+                      </div>
+                      <div class="mt-4 rounded border border-accent/40 bg-accent/5 p-4">
+                        <p class="text-xs text-text-muted">Up next</p>
+                        <p class="mt-1 text-lg font-semibold text-text">Allison Reed is ready</p>
+                        <p class="mt-1 font-mono text-sm text-text-secondary">(555) 019-4402</p>
+                      </div>
+                      <div class="mt-3 space-y-2 opacity-50">
+                        {["Jordan Lee", "Sam Ortiz"].map((name) => (
+                          <div class="rounded border border-border px-3 py-2.5 text-sm text-text-secondary">{name}</div>
+                        ))}
+                      </div>
+                      <div class="mt-4 flex gap-2">
+                        <span class="flex-1 rounded bg-accent py-3 text-center text-sm font-semibold text-bg">
+                          Call next
+                        </span>
+                        <span class="rounded border border-border px-4 py-3 text-sm text-text-secondary">Skip</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
         }
       </div>
-    </div>
-  </section>
 
-  <!-- Honesty -->
-  <section class="border-t border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[760px] text-center">
-      <p class="mono-label">HONESTY</p>
-      <h2 class="mt-3 text-[36px] font-bold leading-tight text-text sm:text-[48px]">This is a tool. Not a miracle.</h2>
-      <div class="mt-8 space-y-4 text-left text-[16px] leading-relaxed text-text-secondary sm:text-center">
-        <p>
-          DailyDialz will not fix a weak offer, improve a terrible sales script, or make bad leads suddenly interested. It
-          will not protect you from calling laws or carrier requirements. And it will not press the call button for someone
-          who refuses to do the work.
-        </p>
-        <p>
-          It removes unnecessary setup and repetitive dialing friction. You still have to call, speak clearly, and follow
-          up—but the software stops giving you another excuse to avoid it.
-        </p>
+      {/* Mid-page CTA after the plan */}
+      <div class="mt-16 flex flex-col items-stretch justify-between gap-6 rounded-[var(--radius-card)] border border-border bg-bg-secondary px-6 py-6 sm:flex-row sm:items-center sm:px-8">
+        <div class="text-center sm:text-left">
+          <p class="font-mono text-xs tracking-[0.06em] text-accent uppercase">THAT’S HOW YOUR CALLS GET DONE.</p>
+          <p class="mt-2 text-lg font-semibold text-text">Preview. Call. Log. Next.</p>
+        </div>
+        <a href={ctaHref} class="btn-primary w-full shrink-0 sm:w-auto">GET DAILYDIALZ · $99 ONE TIME</a>
       </div>
     </div>
   </section>
 
-  <!-- Pricing snapshot -->
-  <section class="border-t border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[560px]">
-      <SectionHeading label="FOUNDER LICENSE" title="Pay once. Use the phone you already have." />
-      <div class="card mt-12 border-accent/30 p-8 sm:p-10">
-        <p class="mono-label">DAILYDIALZ SOLO</p>
-        <p class="mt-4 flex items-baseline gap-2">
-          <span class="text-[52px] font-bold tabular-nums tracking-tight text-text sm:text-[64px]">{site.priceLabel}</span>
-          <span class="text-lg text-text-secondary">one time</span>
+  {/* ═══════════════════════════════════════════
+      CH4 — PRICE & VALUE
+      What you get for what you pay
+  ═══════════════════════════════════════════ */}
+  <section id="price" class="scroll-mt-24 border-b border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="mx-auto max-w-[1100px] text-center">
+        <h2 class="mx-auto max-w-[16ch] text-center text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-text sm:max-w-none">
+          Pay one time. <span class="text-accent">Keep calling.</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-[52ch] text-lg leading-relaxed text-text-secondary lg:max-w-[60ch]">
+          DailyDialz won’t make cold calling easy. It just gives fear less chance to turn into another reason not to start.
         </p>
-        <p class="mt-3 text-[15px] text-text-secondary">For one independent seller on a compatible Android device.</p>
-        <ul class="mt-8 space-y-3 text-[15px] text-text-secondary">
-          {
-            [
-              "Use your existing mobile calling setup",
-              "CSV import, tap-to-call, dispositions",
-              "12 months of updates included",
-              "14-day refund under stated terms",
-            ].map((item) => (
-              <li class="flex gap-3">
-                <span class="text-accent" aria-hidden="true">
-                  ✓
-                </span>
-                {item}
-              </li>
-            ))
-          }
-        </ul>
-        <a href="/pricing" class="btn-primary mt-8 w-full">Get DailyDialz — {site.priceLabel}</a>
+      </div>
+
+      <div class="mt-12 grid items-stretch gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        {/* Value framing — $20 gets you a $100 bill */}
+        <div class="card p-7 sm:p-9">
+          <p class="mono-label">WHAT YOU’RE REALLY BUYING</p>
+          <h3 class="mt-3 text-[24px] font-semibold leading-snug text-text sm:text-[28px]">
+            Less time talking yourself out of the call.
+          </h3>
+          <div class="mt-4 space-y-4 text-[15px] leading-relaxed text-text-secondary">
+            <p>
+              There’s always another lead to research. Another script tweak. Another list to clean up. Software to configure.
+              Another reason to wait until you feel more ready.
+            </p>
+            <p>DailyDialz doesn’t remove the fear.</p>
+            <p>It removes some of the places the fear can hide.</p>
+          </div>
+          <ul class="mt-8 space-y-3">
+            {
+              priceValuePoints.map((item) => (
+                <li class="flex gap-3 text-[15px] text-text-secondary">
+                  <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                    ✓
+                  </span>
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-8 border-t border-border pt-6 text-center text-[15px] leading-relaxed">
+            <span class="text-text">Confidence doesn’t come before the first call.</span>{" "}
+            <span class="text-accent">It comes after.</span>
+          </p>
+        </div>
+
+        {/* Price card */}
+        <div class="card flex flex-col border-accent/30 p-7 sm:p-9">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="mono-label">DAILYDIALZ SOLO</p>
+              <p class="mt-2 text-sm text-text-secondary">Founder pricing</p>
+            </div>
+            <div class="text-right">
+              <p class="text-[48px] font-bold leading-none tabular-nums tracking-tight text-accent sm:text-[56px]">
+                {site.priceLabel}
+              </p>
+              <p class="mt-1 text-sm text-text-secondary">one time</p>
+            </div>
+          </div>
+          <ul class="mt-8 flex-1 space-y-3">
+            {
+              priceIncludesShort.map((item) => (
+                <li class="flex gap-3 text-[15px] text-text-secondary">
+                  <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                    ✓
+                  </span>
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+          <div class="mt-8 border-t border-border pt-6">
+            <div class="flex items-start gap-3 rounded border border-border bg-bg px-4 py-3">
+              <span class="mt-0.5 text-accent" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path
+                    d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <div>
+                <p class="text-sm font-semibold text-text">14-day money-back guarantee</p>
+                <p class="mt-0.5 text-sm text-text-secondary">
+                  If it doesn’t make it easier to start calling and keep calling, get your money back.
+                </p>
+              </div>
+            </div>
+            <a href={ctaHref} class="btn-primary mt-5 w-full">GET DAILYDIALZ · $99 ONE TIME</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="border-t border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
-    <div class="mx-auto max-w-[800px]">
-      <SectionHeading label="QUESTIONS" title="What people ask before they buy." />
-      <div class="mt-12">
+  {/* ═══════════════════════════════════════════
+      CH5 — HOW TO GET IT
+      Next step + buy button
+  ═══════════════════════════════════════════ */}
+  <section id="get" class="scroll-mt-24 border-b border-border bg-bg px-4 py-20 sm:px-6 sm:py-[100px]">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="mx-auto max-w-[1100px] text-center">
+        <h2 class="mx-auto max-w-[16ch] text-center text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-text sm:max-w-[22ch] lg:max-w-none">
+          Buy it. Install it. <span class="text-accent">Make the first call.</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-[800px] text-lg leading-relaxed text-text-secondary">
+          Three steps from this page to your first call.
+        </p>
+      </div>
+
+      <ol class="mx-auto mt-12 grid max-w-[900px] gap-4 sm:grid-cols-3">
+        {
+          getSteps.map((s) => (
+            <li class="card p-6 text-center sm:p-7">
+              <p class="font-mono text-sm text-accent">{s.n}</p>
+              <h3 class="mt-3 text-xl font-semibold text-text">{s.title}</h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-text-secondary">{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      {/* Final purchase band */}
+      <div class="mx-auto mt-12 max-w-[900px] overflow-hidden rounded-[var(--radius-card)] border border-border">
+        <div class="grid lg:grid-cols-[1fr_1.1fr]">
+          <div class="flex flex-col justify-center bg-accent px-8 py-10 text-bg sm:px-10">
+            <p class="font-mono text-xs font-medium tracking-[0.08em] uppercase opacity-80">Time to first call</p>
+            <p class="mt-3 font-mono text-[clamp(3rem,8vw,4.5rem)] font-bold leading-none tabular-nums">60 secs</p>
+            <p class="mt-4 text-base font-medium leading-snug opacity-90">
+              From install to your first call using the phone, number, and leads you already have.
+            </p>
+          </div>
+          <div class="flex flex-col justify-center bg-bg-secondary px-8 py-10 sm:px-10">
+            <p class="text-2xl font-bold text-text sm:text-3xl">{site.name} Solo</p>
+            <p class="mt-2 text-text-secondary">Solo founder license</p>
+            <div class="mt-6 flex flex-wrap items-baseline gap-3">
+              <span class="text-[48px] font-bold tabular-nums tracking-tight text-text">{site.priceLabel}</span>
+              <span class="text-text-secondary">one time · no subscription</span>
+            </div>
+            <div class="mt-8 flex w-full flex-col items-stretch sm:w-auto">
+              <a href={site.checkoutUrl} id="buy" class="btn-primary w-full">
+                {ctaLabel}
+              </a>
+              <p class="mt-4 text-center text-sm text-text-muted">14-day money back guarantee</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ═══════════════════════════════════════════
+      FAQ — before you ask
+  ═══════════════════════════════════════════ */}
+  <section id="faq" class="scroll-mt-24 border-b border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-[100px]">
+    <div class="mx-auto max-w-[1100px]">
+      <h2 class="mx-auto max-w-[18ch] w-full text-center text-[clamp(1.75rem,4.5vw,4rem)] font-bold leading-[1.2] tracking-tight text-text sm:max-w-[22ch] lg:max-w-none">
+        A few things you might be wondering.
+      </h2>
+      <div class="mx-auto mt-12 max-w-[800px]">
         <FaqAccordion items={[...homeFaqs]} idPrefix="home-faq" />
       </div>
-      <p class="mt-8 text-center">
-        <a href="/faq" class="btn-ghost">See the full FAQ →</a>
-      </p>
     </div>
   </section>
 
-  <!-- Founder teaser -->
-  <section class="border-t border-border bg-bg-secondary px-4 py-20 sm:px-6 sm:py-24">
-    <div class="mx-auto max-w-[720px] text-center">
-      <p class="mono-label">WHY IT EXISTS</p>
-      <h2 class="mt-3 text-[32px] font-bold leading-tight text-text sm:text-[40px]">
-        Built because the alternatives were overkill.
+  {/* Closing honesty line */}
+  <section class="bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[640px] text-center">
+      <p class="mono-label">FULL TRANSPARENCY</p>
+      <h2 class="mt-3 text-[28px] font-bold leading-tight text-text sm:text-[36px]">
+        DailyDialz won’t kill the fear.
+        <span class="block">But it will get you to the call faster.</span>
       </h2>
-      <p class="mt-5 text-lg leading-relaxed text-text-secondary">
-        I wanted to make calls—not open a telecom company. DailyDialz is for solo operators and small teams who need to
-        create opportunities without wasting half the day configuring software.
-      </p>
-      <a href="/about" class="btn-ghost mt-6">Read the story →</a>
+      <div class="mt-5 space-y-4 text-[16px] leading-relaxed text-text-secondary">
+        <p>
+          Cold calling doesn’t get easier the longer you think about it. And it sure as hell doesn’t get easier by hiding
+          in busywork.
+        </p>
+        <p>It gets easier because you make the call. Then you make another one.</p>
+        <p class="font-bold text-accent">Every call makes the next one a little easier.</p>
+        <p>DailyDialz is built to help you take that first step.</p>
+        <p>Less friction. Fewer excuses. Faster to the call.</p>
+      </div>
+      <a href={ctaHref} class="btn-primary mt-8 w-full max-w-[360px] sm:w-auto">{ctaLabel}</a>
     </div>
   </section>
-
-  <CtaBand />
 </BaseLayout>

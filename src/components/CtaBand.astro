@@ -22,8 +22,8 @@ const {
       <h2 class="mt-4 text-[36px] font-bold leading-[1.05] tracking-tight text-text sm:text-[56px]">{heading}</h2>
       <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">{body}</p>
       <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a href="/pricing" class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
-        <a href="/pricing" class="btn-ghost">See pricing →</a>
+        <a href={site.checkoutUrl} class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
+        <a href="/#price" class="btn-ghost">See pricing →</a>
       </div>
     </div>
   </div>

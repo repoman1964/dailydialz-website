@@ -1,0 +1,525 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import { site, soloIncludes } from "../data/site";
+
+const pageTitle = "Cold calling for solo operators";
+const pageDescription =
+  "Go from leads sitting in a spreadsheet to consistent daily conversations using your existing Android phone. No CRM, no extra number, no monthly subscription.";
+
+/** One primary CTA label used across the page */
+const ctaLabel = "Get DailyDialz for $99";
+const ctaHref = site.checkoutUrl;
+const checkoutHref = site.checkoutUrl;
+
+const announcementParts = [
+  "No dialing every number by hand",
+  "No new phone number to verify",
+  "No bloated CRM to fight with",
+];
+
+const workflowSteps = [
+  {
+    step: "01",
+    title: "Connect the Google Sheet",
+    body: "Open the lead list you already use. No CSV export maze required to get started.",
+  },
+  {
+    step: "02",
+    title: "Tap a lead and call",
+    body: "Review the lead. Launch the call from your existing Android phone.",
+  },
+  {
+    step: "03",
+    title: "Record the result and move on",
+    body: "Log the outcome. Advance to the next lead. Keep the block moving.",
+  },
+];
+
+const productFeatures = [
+  {
+    title: "Use your own number",
+    body: "Call from your existing Android phone—no DailyDialz-provided business number to buy or verify.",
+  },
+  {
+    title: "Record call outcomes",
+    body: "Capture disposition and notes, then write results back so you know who needs follow-up.",
+  },
+  {
+    title: "Continue where you left off",
+    body: "The queue keeps your place so interruptions don't send you hunting through the sheet again.",
+  },
+];
+
+const audiences = [
+  "Solo insurance agents",
+  "Independent real estate professionals",
+  "Mortgage professionals",
+  "Consultants",
+  "Contractors",
+  "Small-business owners",
+];
+
+const testimonials = [
+  {
+    quote: "I finally finished my first full call block in months.",
+    name: "Placeholder name",
+    role: "Solo founder",
+    result: "",
+  },
+  {
+    quote: "I stopped paying for a CRM I barely used.",
+    name: "Placeholder name",
+    role: "Independent consultant",
+    result: "",
+  },
+  {
+    quote: "It feels like Google Sheets finally became the calling tool I always wanted.",
+    name: "Placeholder name",
+    role: "Recruiting professional",
+    result: "",
+  },
+];
+
+/** Purchase-blocking FAQ only */
+const faqs = [
+  {
+    q: "Do I need a CRM?",
+    a: "No. If your leads already live in Google Sheets, you're ready to go.",
+  },
+  {
+    q: "Do I need another phone number?",
+    a: "No. It works with your existing Android phone.",
+  },
+  {
+    q: "Is there a monthly subscription?",
+    a: "No recurring software subscription required.",
+  },
+  {
+    q: "What if it isn't right for me?",
+    a: `DailyDialz includes a ${site.refundDays}-day refund window under the stated refund terms.`,
+  },
+  {
+    q: "What device do I need?",
+    a: `DailyDialz v1 is built for ${site.minAndroid}. It places calls through your device using your existing mobile setup.`,
+  },
+  {
+    q: "What if I'm not technical?",
+    a: "If you know how to use Google Sheets and make a phone call, you already know almost everything you need.",
+  },
+];
+
+const pricingIncludes = soloIncludes.slice(0, 6);
+
+const riskItems = [
+  {
+    q: "What if it is not right for me?",
+    a: `Request a refund within ${site.refundDays} days under the stated refund terms.`,
+  },
+  {
+    q: "Is there a refund?",
+    a: `Yes — ${site.refundDays}-day refund window. See the refund policy for details.`,
+  },
+  {
+    q: "What device is required?",
+    a: `${site.minAndroid} with cellular calling. Not a VoIP substitute.`,
+  },
+  {
+    q: "Is support included?",
+    a: "Yes — standard support and updates for 12 months with your purchase.",
+  },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath="/get" jsonLd={faqLd} landing>
+  <!-- Announcement bar + hero = 100vh -->
+  <div class="flex min-h-svh flex-col">
+    <!-- 1. Announcement bar -->
+    <div class="shrink-0 border-b border-border bg-bg-secondary px-3 py-2 text-center sm:px-4">
+      <p
+        class="text-[11px] font-medium leading-snug tracking-wide text-accent uppercase sm:text-sm sm:leading-normal"
+      >
+        {
+          announcementParts.map((part, i) => (
+            <>
+              {i > 0 && (
+                <span class="mx-1.5 text-text-muted sm:mx-2.5" aria-hidden="true">
+                  ·
+                </span>
+              )}
+              <span>{part}</span>
+            </>
+          ))
+        }
+      </p>
+    </div>
+
+    <!-- 2. Hero -->
+    <section class="relative flex flex-1 flex-col overflow-hidden border-b border-border">
+      <div class="pointer-events-none absolute inset-0 gradient-wash opacity-80" aria-hidden="true"></div>
+      <div
+        class="relative mx-auto flex w-full max-w-[1400px] flex-1 flex-col items-center justify-center px-4 py-12 text-center sm:px-6 sm:py-16"
+      >
+        <p class="mono-label">COLD CALLING FOR SOLOPRENEURS</p>
+        <h1 class="mt-3 whitespace-pre-line text-[36px] font-bold leading-[1.15] tracking-tight text-text sm:text-[56px] lg:text-[64px]">
+          {"COLD CALLING SUCKS\nDailyDialz Helps It Suck Less"}
+        </h1>
+        <p class="mx-auto mt-5 max-w-2xl text-lg font-medium leading-relaxed text-text-secondary sm:text-xl">
+          Tap a lead. Make the call. Record the result. Keep going.
+        </p>
+        <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row">
+          <a href={ctaHref} class="btn-primary !text-[18px]">{ctaLabel}</a>
+          <a href="#how-it-works" class="btn-ghost !text-[18px]">See how it works →</a>
+        </div>
+        <p class="mt-5 text-sm text-text-muted">
+          One-time founder pricing · No monthly subscription · Use your existing number
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Three-step workflow -->
+  <section
+    id="how-it-works"
+    class="border-b border-border bg-bg px-4 py-14 sm:px-6 sm:py-16"
+    aria-label="How it works"
+  >
+    <div class="mx-auto max-w-[1400px]">
+      <p class="mono-label text-center">HOW IT WORKS</p>
+      <h2 class="mt-3 text-center text-[28px] font-bold leading-tight text-text sm:text-[40px]">
+        Three steps. Then keep going.
+      </h2>
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          workflowSteps.map((s) => (
+            <div class="group rounded-[var(--radius-card)] border border-border bg-bg-secondary px-6 py-6 text-left transition duration-150 ease-out hover:-translate-y-0.5 hover:border-accent/50">
+              <p class="font-mono text-sm font-medium tracking-[0.08em] text-accent">{s.step}</p>
+              <h3 class="mt-3 text-lg font-semibold text-text transition-colors group-hover:text-accent">
+                {s.title}
+              </h3>
+              <p class="mt-2 text-base leading-relaxed text-text-secondary">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Founder story + video -->
+  <section id="founder" class="border-b border-border bg-bg-secondary px-4 py-14 sm:px-6 sm:py-16">
+    <div class="mx-auto w-full max-w-[1100px]">
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div class="text-left">
+          <p class="mono-label">WHY I BUILT DAILYDIALZ</p>
+          <h2 class="mt-3 text-[28px] font-semibold leading-tight text-text sm:text-[32px]">
+            I was finally ready to make the call. They gave me an excuse not to.
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            I had spent the day avoiding the phone. Then I finally forced myself to. My palm was sweating. My heart was
+            racing. I was ready—until setup buried me in a new number, another account, verification, and approvals.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            They had given me one more excuse not to sell. DailyDialz exists so that first call—and every call after—stays
+            simple.
+          </p>
+          <p class="mt-4 text-base font-semibold text-text">Watch the moment that created DailyDialz.</p>
+        </div>
+        <div class="card overflow-hidden p-0">
+          {
+            site.founderVideoEmbedUrl ? (
+              <div class="relative aspect-video w-full bg-bg">
+                <iframe
+                  class="absolute inset-0 h-full w-full"
+                  src={site.founderVideoEmbedUrl}
+                  title="DailyDialz founder video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div class="relative flex aspect-video w-full flex-col items-center justify-center gap-3 bg-bg px-6 text-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent"
+                  aria-hidden="true"
+                >
+                  <svg class="ml-1 h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7L8 5z" />
+                  </svg>
+                </div>
+                <p class="font-mono text-xs tracking-[0.06em] text-accent uppercase">Founder video</p>
+                <p class="max-w-xs text-sm leading-relaxed text-text-secondary">
+                  ~5 minutes. Set <span class="font-mono text-text">site.founderVideoEmbedUrl</span> to go live.
+                </p>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Pain comparison -->
+  <section class="border-b border-border bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="text-center">
+        <p class="mono-label">BEFORE THEY EVEN LET YOU SAY HELLO</p>
+        <h2 class="mt-3 whitespace-pre-line text-[32px] font-bold leading-[1.15] tracking-tight text-text sm:text-[48px]">
+          {"Cold calling is already hard.\nThey just make it harder."}
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        <div class="card p-7 sm:p-8">
+          <p class="mono-label">BEFORE THE FIRST CALL</p>
+          <h3 class="mt-3 text-[24px] font-semibold leading-tight text-text">They give you an excuse to stop</h3>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            Buy another number. Create another account. Submit business details. Verify your identity. Wait for approval.
+            Get denied. Then fight software settings and a list that won't import.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            You were ready to sell. They handed you a software project.
+          </p>
+        </div>
+        <div class="card p-7 sm:p-8">
+          <p class="mono-label">EVERY CALL AFTER THAT</p>
+          <h3 class="mt-3 text-[24px] font-semibold leading-tight text-text">They wear you down call by call</h3>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            Open the sheet. Find the next lead. Switch apps. Punch in ten digits. Make the call. Go back. Find your place.
+            Record the result. Then do it again.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-text-secondary">
+            Every extra step drains the momentum you are fighting to build.
+          </p>
+        </div>
+      </div>
+      <p class="mx-auto mt-10 max-w-2xl text-center text-lg leading-relaxed text-accent">
+        DailyDialz gets you to the first call faster and keeps every call simple.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <a href={ctaHref} class="btn-primary !text-[18px]">{ctaLabel}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Product interface + key benefits -->
+  <section class="relative overflow-hidden border-b border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="pointer-events-none absolute inset-0 gradient-wash opacity-50" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1100px]">
+      <div class="text-center lg:text-left">
+        <p class="mono-label">INSIDE THE APP</p>
+        <h2 class="mt-3 text-[32px] font-bold leading-tight text-text sm:text-[44px]">
+          DailyDialz Is Built to Get Calls Done
+        </h2>
+      </div>
+      <div class="mt-10 grid items-stretch gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <!-- Product frame (screenshot placeholder — swap for real UI capture) -->
+        <div class="card flex min-h-[320px] flex-col overflow-hidden p-0 sm:min-h-[400px]">
+          <div class="flex items-center gap-2 border-b border-border bg-bg px-4 py-3">
+            <span class="h-2.5 w-2.5 rounded-full bg-text-muted/40" aria-hidden="true"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-text-muted/40" aria-hidden="true"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-text-muted/40" aria-hidden="true"></span>
+            <span class="ml-2 font-mono text-[11px] tracking-wide text-text-muted uppercase">Call session</span>
+          </div>
+          <div class="flex flex-1 flex-col justify-between bg-bg p-6 sm:p-8">
+            <div>
+              <p class="font-mono text-xs tracking-[0.06em] text-accent uppercase">Next lead</p>
+              <p class="mt-3 text-2xl font-semibold text-text">Jordan Lee</p>
+              <p class="mt-1 font-mono text-lg text-text-secondary">(555) 014-2281</p>
+              <dl class="mt-6 space-y-2 text-sm text-text-secondary">
+                <div class="flex justify-between gap-4 border-b border-border pb-2">
+                  <dt class="text-text-muted">Company</dt>
+                  <dd class="text-text">Northline Agency</dd>
+                </div>
+                <div class="flex justify-between gap-4 border-b border-border pb-2">
+                  <dt class="text-text-muted">Source</dt>
+                  <dd class="text-text">Google Sheet · Leads</dd>
+                </div>
+                <div class="flex justify-between gap-4">
+                  <dt class="text-text-muted">Last result</dt>
+                  <dd class="text-text">—</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <span
+                class="inline-flex flex-1 items-center justify-center rounded-[4px] bg-accent px-4 py-3 text-center text-sm font-semibold text-bg"
+              >
+                Call current
+              </span>
+              <span
+                class="inline-flex flex-1 items-center justify-center rounded-[4px] border border-border px-4 py-3 text-center text-sm font-medium text-text-secondary"
+              >
+                Skip
+              </span>
+            </div>
+            <p class="mt-4 text-center text-xs text-text-muted">
+              UI frame — replace with real product screenshot when available
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          {
+            productFeatures.map((f) => (
+              <div class="card flex-1 p-6 transition duration-150 hover:border-accent/40">
+                <h3 class="text-lg font-semibold text-text">{f.title}</h3>
+                <p class="mt-2 text-base leading-relaxed text-text-secondary">{f.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Who it is for -->
+  <section class="border-b border-border bg-bg px-4 py-14 sm:px-6 sm:py-16">
+    <div class="mx-auto max-w-[1100px] text-center">
+      <p class="mono-label">WHO IT IS FOR</p>
+      <h2 class="mt-3 text-[28px] font-bold leading-tight text-text sm:text-[40px]">
+        Solo operators who live in spreadsheets
+      </h2>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        {
+          audiences.map((label) => (
+            <span class="rounded-[var(--radius-card)] border border-border bg-bg-secondary px-4 py-2.5 text-sm font-medium text-text sm:text-base">
+              {label}
+            </span>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-8 max-w-xl text-base leading-relaxed text-text-secondary">
+        <span class="font-semibold text-text">Not for:</span> large sales teams that need multi-seat CRM, predictive
+        dialing, or a separate telecom stack.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. Testimonials -->
+  <section class="border-b border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[1100px]">
+      <SectionHeading
+        label="SOCIAL PROOF"
+        title="Here's what others are saying"
+        subtitle="Placeholder quotes until stronger customer proof is ready. Swap names and results when available."
+      />
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          testimonials.map((t) => (
+            <blockquote class="card flex flex-col p-6 sm:p-7">
+              <p class="flex-1 text-base leading-relaxed text-text sm:text-[17px]">“{t.quote}”</p>
+              <footer class="mt-6 border-t border-border pt-4">
+                <p class="font-medium text-text">{t.name}</p>
+                <p class="mt-1 font-mono text-xs tracking-[0.06em] text-accent uppercase">{t.role}</p>
+                {t.result && <p class="mt-2 text-sm text-text-secondary">{t.result}</p>}
+              </footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Pricing + 11. Risk reversal -->
+  <section id="pricing" class="border-b border-border bg-bg px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[560px]">
+      <div class="card border-accent/30 p-8 sm:p-10">
+        <p class="mono-label text-center">PAY ONCE</p>
+        <h2 class="mt-3 text-center text-[28px] font-bold text-text sm:text-[32px]">{site.name}</h2>
+        <p class="mt-4 flex items-baseline justify-center gap-2">
+          <span class="text-[56px] font-bold tabular-nums tracking-tight text-text sm:text-[64px]">{site.priceLabel}</span>
+          <span class="text-lg text-text-secondary">one time</span>
+        </p>
+        <p class="mt-2 text-center text-base text-text-secondary">One-time payment. No monthly subscription.</p>
+        <ul class="mt-8 space-y-3">
+          {
+            pricingIncludes.map((item) => (
+              <li class="flex gap-3 text-base text-text-secondary">
+                <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                  ✓
+                </span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={checkoutHref} class="btn-primary mt-10 w-full !text-[18px]">{ctaLabel}</a>
+        <p class="mt-4 text-center text-sm text-text-muted">
+          {site.refundDays}-day refund under stated terms · {site.minAndroid} required · No monthly fee
+        </p>
+      </div>
+
+      <!-- Risk reversal -->
+      <div class="mt-8 grid gap-3 sm:grid-cols-2">
+        {
+          riskItems.map((item) => (
+            <div class="rounded-[var(--radius-card)] border border-border bg-bg-secondary p-5">
+              <p class="text-sm font-semibold text-text">{item.q}</p>
+              <p class="mt-2 text-sm leading-relaxed text-text-secondary">{item.a}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-4 text-center text-sm text-text-muted">
+        Full details on the{" "}
+        <a href="/refund" class="text-text-secondary underline decoration-border underline-offset-4 hover:text-accent"
+          >refund policy</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- 12. FAQ -->
+  <section class="border-b border-border bg-bg-secondary px-4 py-16 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-[800px]">
+      <SectionHeading label="QUESTIONS" title="Before you buy" />
+      <div class="mt-10">
+        <FaqAccordion items={faqs} idPrefix="sales-faq" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. Final CTA -->
+  <section class="bg-bg-secondary">
+    <div class="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20">
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent-violet/20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative mx-auto max-w-[720px] text-center">
+        <p class="mono-label">READY TO MAKE MORE CALLS WITHOUT MORE SOFTWARE?</p>
+        <h2 class="mt-4 text-[32px] font-bold leading-[1.1] tracking-tight text-text sm:text-[48px]">
+          Use the spreadsheet you already have.
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">
+          Use the Android phone you already own. Start building a more consistent sales pipeline today.
+        </p>
+        <div class="mt-8 flex flex-col items-center gap-4">
+          <a href={ctaHref} class="btn-primary !text-[18px]">{ctaLabel}</a>
+          <p class="text-sm text-text-muted">
+            One-time founder pricing · {site.priceLabel} · {site.refundDays}-day refund under stated terms
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Landing page only */
+  main .mono-label {
+    font-size: 20px !important;
+  }
+</style>

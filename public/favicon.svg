@@ -1,6 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="12" fill="#0A0A0F"/>
-  <rect x="2" y="2" width="60" height="60" rx="10" stroke="#B4FF39" stroke-width="2"/>
-  <path d="M20 38c8 8 14 10 22 6l-4-7c-2 1-5 0-8-3s-4-6-3-8l-7-4c-4 8-2 14 0 16z" fill="#B4FF39"/>
-  <circle cx="42" cy="22" r="4" fill="#5B4EFF"/>
+  <!-- Brand: near-black field, lime glyph, violet pulse -->
+  <rect width="64" height="64" rx="14" fill="#0A0A0F"/>
+  <!-- Soft dial arcs -->
+  <path d="M18 38c7-14 20-20 32-14" stroke="#B4FF39" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+  <path d="M15 42c9-18 26-24 40-16" stroke="#B4FF39" stroke-width="1.75" stroke-linecap="round" opacity="0.28"/>
+  <!-- Phone handset (Material call mark) -->
+  <path
+    fill="#B4FF39"
+    d="M22.4 30.1c1.9 3.8 5 6.9 8.8 8.8l2.9-2.9c.4-.4.9-.5 1.4-.3 1.5.5 3.1.8 4.8.8.7 0 1.3.6 1.3 1.3v4.7c0 .7-.6 1.3-1.3 1.3C27.5 43.8 17.2 33.5 17.2 20.8c0-.7.6-1.3 1.3-1.3h4.7c.7 0 1.3.6 1.3 1.3 0 1.7.3 3.3.8 4.8.2.5.1 1-.3 1.4l-2.9 2.9z"
+  />
+  <!-- Violet live/pulse accent -->
+  <circle cx="44" cy="20" r="5" fill="#5B4EFF"/>
+  <circle cx="44" cy="20" r="2" fill="#B4FF39"/>
 </svg>

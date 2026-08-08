@@ -36,7 +36,7 @@ const faqLd = {
       <h1 class="mt-4 text-[40px] font-bold leading-[1.05] tracking-tight text-text sm:text-[56px]">{feature.title}</h1>
       <p class="mx-auto mt-5 max-w-[640px] text-lg leading-relaxed text-text-secondary">{feature.subtitle}</p>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="/pricing" class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
+        <a href={site.checkoutUrl} class="btn-primary">Get DailyDialz — {site.priceLabel}</a>
         <a href="/how-it-works" class="btn-ghost">See how it works →</a>
       </div>
     </div>

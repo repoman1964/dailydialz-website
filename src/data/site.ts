@@ -2,34 +2,120 @@ export const site = {
   name: "DailyDialz",
   tagline: "Use the phone you already have. Make the calls you keep postponing.",
   description:
-    "DailyDialz turns your spreadsheet into a simple mobile calling workflow—without forcing you to buy and verify another business number. One-time founder pricing.",
+    "DailyDialz turns your spreadsheet into a focused call session on your existing Android phone—no new business number, no CRM maze, no monthly subscription. One-time founder pricing.",
   url: "https://dailydialz.com",
   email: "support@dailydialz.com",
   price: 99,
+  /** Fixed two-decimal string for payment APIs (Stripe / PayPal). */
+  priceAmount: "99.00",
   priceLabel: "$99",
+  priceCurrency: "USD",
   pricePeriod: "one time",
+  productName: "DailyDialz Solo",
+  productSku: "dailydialz-solo",
   updatesMonths: 12,
   refundDays: 14,
   platform: "Android",
   minAndroid: "Android 12+",
   year: new Date().getFullYear(),
-  checkoutUrl: "#buy",
-  demoUrl: "#demo",
+  /**
+   * Primary purchase CTA destination — on-site buy page (Stripe + PayPal live there).
+   */
+  checkoutUrl: "/buy",
+  demoUrl: "#demonstration",
+  /** YouTube/Vimeo embed URL for the founder sales video (empty = show placeholder) */
+  founderVideoEmbedUrl: "",
+  /** YouTube/Vimeo embed URL for the product demo screen recording (empty = show placeholder) */
+  productDemoEmbedUrl: "",
+  /**
+   * Stripe Payment Link for DailyDialz Solo ($99 one-time).
+   * Used on `/buy` when the buyer chooses card checkout.
+   * Override at build time with PUBLIC_STRIPE_PAYMENT_LINK if needed.
+   */
+  stripePaymentLink:
+    (import.meta.env.PUBLIC_STRIPE_PAYMENT_LINK as string | undefined) ||
+    "https://buy.stripe.com/6oUcN6ad598r06Z33NgrS08",
+  /**
+   * PayPal payment link for DailyDialz Solo ($99 one-time).
+   * Used on `/buy` when the buyer chooses PayPal.
+   * Override at build time with PUBLIC_PAYPAL_PAYMENT_LINK if needed.
+   */
+  paypalPaymentLink:
+    (import.meta.env.PUBLIC_PAYPAL_PAYMENT_LINK as string | undefined) ||
+    "https://www.paypal.com/ncp/payment/VQJ3SVLCJ6JZ2",
 } as const;
 
+/** Main nav — anchors map to the 5-chapter sales structure on the homepage */
 export const navLinks = [
-  { href: "/how-it-works", label: "How It Works" },
-  { href: "/features", label: "Features" },
-  { href: "/use-cases", label: "Use Cases" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/#demonstration", label: "Demo" },
+  { href: "/#qualification", label: "Who it's for" },
+  { href: "/#plan", label: "How it works" },
+  { href: "/#price", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
 ] as const;
 
 export const trustItems = [
-  "USE YOUR EXISTING NUMBER",
-  "CSV LIST → CALL QUEUE",
-  "ONE-TIME FOUNDER LICENSE",
-  "BUILT FOR SOLO OUTBOUND",
+  "1 SEAT",
+  "$99 ONE TIME",
+  "ANDROID",
+  "YOUR EXISTING NUMBER",
+  "NO MONTHLY FEE",
+] as const;
+
+/** Ch2 qualification — works well if / not for you */
+export const worksWellIf = [
+  "Your leads are already in a spreadsheet",
+  "You’re the one making the calls",
+  "You want to start calling without a setup project",
+  "You want to call from your own phone",
+  "You want a simple call queue, not another CRM",
+] as const;
+
+export const notForYou = [
+  "You’re managing a large sales team",
+  "You need multi-user pipelines and admin controls",
+  "You want predictive or parallel dialing",
+  "You need a full business phone system",
+  "You want software to do the selling for you",
+] as const;
+
+/** Ch3 — the plan (4 steps; bulk of the sales page) */
+export const planSteps = [
+  {
+    n: "01",
+    label: "PREVIEW THE LEAD",
+    title: "Preview the lead.",
+    body: "See who you’re calling before you dial. Name, number, notes, source, whatever context matters.",
+    ui: "lead" as const,
+  },
+  {
+    n: "02",
+    label: "MAKE THE CALL",
+    title: "Make the call.",
+    body: "Tap once. Your phone places the call using the number you already have.",
+    ui: "call" as const,
+  },
+  {
+    n: "03",
+    label: "LOG THE RESULT",
+    title: "Log the result.",
+    body: "Mark what happened. Answered. No answer. Callback. Interested. Add a note if needed.",
+    ui: "outcome" as const,
+  },
+  {
+    n: "04",
+    label: "MOVE TO THE NEXT ONE",
+    title: "Move to the next one.",
+    body: "The next lead is already waiting. No bouncing back to the spreadsheet. No hunting for your place.",
+    ui: "next" as const,
+  },
+] as const;
+
+/** Ch5 — how to get it */
+export const getSteps = [
+  { n: "01", title: "Buy it", body: "DailyDialz Solo. $99 once. No subscription." },
+  { n: "02", title: "Install it", body: "Put DailyDialz on your phone." },
+  { n: "03", title: "Make the first call", body: "Connect your leads. Preview the first one. Tap to call." },
 ] as const;
 
 export const features = [
@@ -100,28 +186,32 @@ export const useCases = [
 
 export const homeFaqs = [
   {
-    q: "Does DailyDialz require KYC or a separate business number?",
-    a: "DailyDialz does not require you to purchase a separate DailyDialz-provided phone number for the standard mobile calling workflow. You use your existing compatible mobile phone and calling service. Your carrier, OS, country, or calling activity may still have their own requirements.",
+    q: "How fast can I start calling?",
+    a: "Fast. DailyDialz is built to get you from install to your first outbound call in about 60 seconds.",
   },
   {
-    q: "Is DailyDialz a VoIP provider?",
-    a: "No. DailyDialz is calling-workflow software, not a replacement mobile carrier or telecom provider.",
+    q: "What kind of lead list can I use?",
+    a: "DailyDialz is built around the spreadsheet or lead list you already use. Connect it, choose your list, and start calling.",
   },
   {
-    q: "Does it auto-dial people without my involvement?",
-    a: "No. You review the lead and intentionally launch each call through the supported mobile workflow.",
+    q: "Do I need a new phone number?",
+    a: "No. DailyDialz uses the phone and number you already have.",
   },
   {
-    q: "What file types can I import?",
-    a: "Version one focuses on CSV lead lists via the system file picker. A phone number column is required; other columns are preserved for context and export.",
+    q: "Do I need a CRM?",
+    a: "No. That’s kind of the point. DailyDialz gives you a simple calling workflow without making you rebuild everything inside another CRM.",
   },
   {
-    q: "Is there a monthly fee?",
-    a: "No. The founder license is $99 one time. Your purchase includes 12 months of updates. The purchased version remains usable under the license terms after that period.",
+    q: "Is there a monthly subscription?",
+    a: "No. DailyDialz Solo is $99 one time.",
   },
   {
-    q: "What platforms are supported?",
-    a: "DailyDialz v1 is built for Android (Android 12+). It places cellular calls through your device SIM using your existing compatible mobile setup.",
+    q: "What if DailyDialz isn’t for me?",
+    a: "Run a real call block. If it doesn’t make calling easier, you’re covered by the 14-day money-back guarantee.",
+  },
+  {
+    q: "What happens after I buy?",
+    a: "Install DailyDialz, connect your leads, preview the first one, and make the call.",
   },
 ] as const;
 
@@ -218,14 +308,32 @@ export const fullFaqs: { group: string; items: { q: string; a: string }[] }[] = 
 ];
 
 export const soloIncludes = [
-  "1 user on a compatible Android device",
+  "60 seconds to your first call",
   "Use with your existing mobile calling setup",
-  "CSV lead-list import",
+  "Spreadsheet / lead-list connection",
   "Tap-to-call workflow",
   "Call outcomes and notes",
   "Queue progression and session history",
   "DNC protection on marked rows",
-  "Results export (does not overwrite your source file)",
+  "Results written back so you keep your place",
   "12 months of updates",
   "14-day refund window under stated terms",
+] as const;
+
+/** Ch4 value framing — what $99 buys vs the friction it replaces */
+export const priceValuePoints = [
+  "Less setup before call #1",
+  "Less switching around between calls",
+  "Less chance to lose your place",
+  "Less room to turn hesitation into procrastination",
+  "A faster path from “I should call” to actually calling",
+] as const;
+
+export const priceIncludesShort = [
+  "Your existing phone and number",
+  "Spreadsheet to calling queue",
+  "Preview each lead before you call",
+  "Tap to call",
+  "Outcomes and notes",
+  "12 months of updates",
 ] as const;

@@ -29,7 +29,9 @@ import { site } from "../data/site";
             </li>
             <li>
               <span class="block text-xs tracking-wide text-text-muted uppercase">Product</span>
-              <a class="mt-1 inline-block text-text no-underline hover:text-accent" href="/pricing">Get DailyDialz — {site.priceLabel}</a>
+              <a class="mt-1 inline-block text-text no-underline hover:text-accent" href={site.checkoutUrl}>
+                Get DailyDialz — {site.priceLabel}
+              </a>
             </li>
             <li>
               <span class="block text-xs tracking-wide text-text-muted uppercase">Topics we can help with</span>

@@ -1,51 +1,213 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CtaBand from "../components/CtaBand.astro";
 import { site } from "../data/site";
 ---
 
-<BaseLayout title="Refund Policy" description={`DailyDialz ${site.refundDays}-day refund policy for founder licenses.`}>
+<BaseLayout
+  title="Refund Policy"
+  description="DailyDialz 14-day money-back guarantee and refund policy from Dimension Seven Systems."
+  canonicalPath="/refund"
+  hideNav
+>
   <section class="bg-bg px-4 py-16 sm:px-6 sm:py-24">
     <article class="prose-legal mx-auto max-w-[760px]">
-      <p class="mono-label">LEGAL</p>
-      <h1 class="mt-3 text-[40px] font-bold text-text sm:text-[48px]">Refund Policy</h1>
-      <p class="mt-4 text-sm text-text-muted">Last updated: August 3, 2026</p>
+      <h1 class="text-[40px] font-bold text-text sm:text-[48px]">DailyDialz Refund Policy</h1>
+      <p class="mt-4 text-sm text-text-muted">Effective Date: August 8, 2026</p>
 
-      <h2>1. Refund window</h2>
       <p>
-        If DailyDialz is not a fit for your workflow, you may request a refund within <strong class="text-text">{site.refundDays} days</strong> of purchase,
-        subject to the terms shown at checkout (which control if they differ).
+        DailyDialz is a product of <strong class="font-semibold text-text">Dimension Seven Systems</strong>.
+      </p>
+      <p>
+        We want you to have enough time to use DailyDialz in your actual calling workflow and decide whether it is right
+        for you.
+      </p>
+      <p>That is why every eligible DailyDialz purchase is protected by our:</p>
+
+      <h2 class="!mt-8 !text-[clamp(1.5rem,3vw,2rem)] !font-bold text-accent">14-Day Money-Back Guarantee</h2>
+      <p>
+        If DailyDialz is not a good fit for you, you may request a refund within{" "}
+        <strong class="font-semibold text-text">14 calendar days of your original purchase date</strong>.
       </p>
 
-      <h2>2. How to request</h2>
+      <h2>1. How the Guarantee Works</h2>
       <p>
-        Email <a class="text-text underline decoration-border underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a> with:
+        You may install DailyDialz, use it with your calling workflow and evaluate whether it performs as expected for you.
       </p>
+      <p>
+        If you decide you do not want to keep DailyDialz, contact us within 14 calendar days of purchase and request a
+        refund.
+      </p>
+      <p>You do not need to prove that DailyDialz is defective to use the guarantee.</p>
+      <p>It is a satisfaction guarantee.</p>
+
+      <h2>2. Refund Request Deadline</h2>
+      <p>
+        Refund requests must be received within{" "}
+        <strong class="font-semibold text-text">14 calendar days of the original purchase date</strong>.
+      </p>
+      <p>
+        For example, if you purchase DailyDialz on August 1, your refund request must be submitted no later than August 15.
+      </p>
+      <p>Requests submitted after the 14-day guarantee period are generally not eligible for a refund.</p>
+
+      <h2>3. What Happens When You Receive a Refund</h2>
+      <p>A refund cancels your DailyDialz license.</p>
+      <p>Once a refund is approved:</p>
       <ul>
-        <li>The email used at checkout</li>
-        <li>Order / receipt ID</li>
-        <li>A brief reason (helps us improve; not a condition for an eligible refund)</li>
+        <li>Your license to use DailyDialz terminates</li>
+        <li>You must stop using the DailyDialz application</li>
+        <li>You may be required to uninstall DailyDialz from your devices</li>
+        <li>License activation associated with the refunded purchase may be disabled</li>
+        <li>Continued use of DailyDialz after receiving a refund is not authorized</li>
       </ul>
-
-      <h2>3. Processing</h2>
       <p>
-        Approved refunds are returned to the original payment method through the payment processor. Timing depends on your
-        bank or card issuer after we process the request.
+        Where supported by the DailyDialz licensing system, access to the application may be automatically deactivated
+        following a refund.
+      </p>
+      <p>
+        A refund returns the purchase price. It does not provide a free perpetual license to continue using the software.
       </p>
 
-      <h2>4. Exclusions</h2>
+      <h2>4. Refund Amount</h2>
       <p>
-        Refunds may be declined for abuse (for example repeated purchase-refund cycles), chargebacks already in process,
-        purchases outside the stated window, or licenses obtained through unauthorized channels. Chargebacks may result in
-        license revocation.
+        Approved refunds will generally be issued for the amount actually paid for the eligible DailyDialz license.
+      </p>
+      <p>The refund does not include unrelated costs you may incur through third parties, including:</p>
+      <ul>
+        <li>Mobile carrier charges</li>
+        <li>Data charges</li>
+        <li>Internet service</li>
+        <li>Google services</li>
+        <li>Device costs</li>
+        <li>Third-party software or services</li>
+      </ul>
+      <p>DailyDialz does not control those charges.</p>
+
+      <h2>5. Refund Method</h2>
+      <p>Refunds will normally be returned to the original payment method used for the purchase.</p>
+      <p>
+        The amount of time required for the refund to appear in your account may depend on the payment processor, card
+        issuer or financial institution.
+      </p>
+      <p>
+        Dimension Seven Systems does not control bank or card-processing times after a refund has been issued.
       </p>
 
-      <h2>5. After a refund</h2>
+      <h2>6. Purchases Through Third-Party Stores</h2>
       <p>
-        Upon refund, your license ends and you must stop using the software and delete distributed copies obtained under that
-        purchase.
+        If DailyDialz is purchased through a third-party marketplace, app store or reseller, the refund may be subject to
+        that provider's refund procedures and policies.
       </p>
+      <p>
+        Where the third party controls the transaction, you may need to request the refund directly through that provider.
+      </p>
+
+      <h2>7. Abuse of the Guarantee</h2>
+      <p>
+        The 14-day guarantee is intended to let legitimate customers evaluate DailyDialz without taking unnecessary
+        financial risk.
+      </p>
+      <p>
+        Dimension Seven Systems may deny a refund request where there is reasonable evidence of fraud, abuse or misuse of
+        the refund program.
+      </p>
+      <p>Examples may include:</p>
+      <ul>
+        <li>Repeatedly purchasing and refunding DailyDialz to avoid paying for continued use</li>
+        <li>Creating multiple accounts or identities to obtain repeated guarantee periods</li>
+        <li>Attempting to continue using DailyDialz after receiving a refund</li>
+        <li>Tampering with or attempting to bypass DailyDialz licensing or activation controls</li>
+        <li>Fraudulent payment activity</li>
+        <li>Chargeback abuse</li>
+        <li>Other deliberate attempts to obtain continued use of the software without payment</li>
+      </ul>
+      <p>
+        Nothing in this section is intended to limit rights that cannot legally be waived under applicable law.
+      </p>
+
+      <h2>8. Chargebacks</h2>
+      <p>If you have a problem with your purchase, please contact us before initiating a chargeback.</p>
+      <p>A chargeback is different from a refund request.</p>
+      <p>
+        If a chargeback is initiated, the associated DailyDialz license may be suspended or terminated while the payment
+        dispute is being investigated.
+      </p>
+      <p>
+        We reserve the right to provide transaction, licensing and account records to the applicable payment processor or
+        financial institution when responding to a payment dispute.
+      </p>
+
+      <h2>9. Software Compatibility</h2>
+      <p>
+        DailyDialz is software that interacts with your mobile device, operating system, mobile carrier and supported
+        third-party services.
+      </p>
+      <p>
+        We encourage customers to review the current system requirements and compatibility information before purchasing.
+      </p>
+      <p>
+        If DailyDialz does not work satisfactorily with your setup, you may still request a refund during the 14-day
+        guarantee period.
+      </p>
+
+      <h2>10. Your Data After a Refund</h2>
+      <p>Receiving a refund does not automatically delete information stored in services you control.</p>
+      <p>
+        For example, information that DailyDialz has written to your Google Sheets remains in your Google account unless you
+        delete it.
+      </p>
+      <p>
+        Locally stored DailyDialz information may remain on your device until you uninstall the application or clear its
+        application data.
+      </p>
+      <p>
+        Personal information maintained by Dimension Seven Systems will be handled according to the{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href="/privacy"
+          >DailyDialz Privacy Policy</a
+        >{" "}
+        and applicable data-retention requirements.
+      </p>
+
+      <h2>11. How to Request a Refund</h2>
+      <p>To request a refund, contact:</p>
+      <p>
+        <strong class="font-semibold text-text">Dimension Seven Systems</strong><br />
+        DailyDialz
+      </p>
+      <p>
+        <strong class="font-semibold text-text">Email:</strong>{" "}
+        <a class="text-text underline decoration-border underline-offset-4 hover:text-accent" href={`mailto:${site.email}`}
+          >{site.email}</a
+        >
+      </p>
+      <p>Please include:</p>
+      <ul>
+        <li>The email address used for your purchase</li>
+        <li>Your order or transaction number, if available</li>
+        <li>The approximate purchase date</li>
+      </ul>
+      <p>
+        You may tell us why you are requesting a refund, and we appreciate that feedback, but a detailed explanation is not
+        required to use the 14-day money-back guarantee.
+      </p>
+
+      <h2>12. Changes to This Policy</h2>
+      <p>Dimension Seven Systems may update this Refund Policy from time to time.</p>
+      <p>
+        The refund terms that applied when you purchased DailyDialz will govern that purchase unless a change is required by
+        law or provides you with more favorable terms.
+      </p>
+
+      <h2>The Short Version</h2>
+      <p>Buy DailyDialz.</p>
+      <p>Use it.</p>
+      <p>See whether it helps you get through your calls.</p>
+      <p>
+        If it is not for you, contact us within{" "}
+        <strong class="font-semibold text-text">14 days of purchase</strong> and request your money back.
+      </p>
+      <p>If we refund your purchase, your DailyDialz license ends.</p>
+      <p>That's the deal.</p>
     </article>
   </section>
-  <CtaBand />
 </BaseLayout>

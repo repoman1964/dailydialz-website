@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getSteps, site } from "../../data/site";
+
+const pageTitle = "Purchase complete";
+const pageDescription = `Thanks for buying ${site.productName}. Install DailyDialz and make your first call.`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/buy/success"
+  landing
+>
+  <div class="border-b border-border bg-bg/95 px-4 py-3 sm:px-6">
+    <div class="mx-auto flex max-w-[720px] items-center justify-between gap-4">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary no-underline transition-colors hover:text-text"
+      >
+        <span aria-hidden="true">←</span>
+        DailyDialz
+      </a>
+      <p class="font-mono text-[11px] tracking-[0.06em] text-accent uppercase">Step 01 complete</p>
+    </div>
+  </div>
+
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 gradient-wash opacity-50" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[720px] px-4 py-16 text-center sm:px-6 sm:py-24">
+      <div
+        class="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent"
+        aria-hidden="true"
+      >
+        <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+
+      <p class="mono-label mt-8">PAYMENT RECEIVED</p>
+      <h1 class="mt-3 text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.1] tracking-tight text-text">
+        You’re in. <span class="text-accent">Now install it.</span>
+      </h1>
+      <p class="mx-auto mt-4 max-w-[480px] text-base leading-relaxed text-text-secondary sm:text-lg">
+        Thanks for getting {site.productName}. Check your inbox for the receipt and license details, then put DailyDialz
+        on your phone.
+      </p>
+
+      <p
+        id="buyer-summary"
+        class="mx-auto mt-6 hidden max-w-[420px] rounded border border-border bg-bg-secondary px-4 py-3 text-sm text-text-secondary"
+        role="status"
+      >
+      </p>
+
+      <ol class="mx-auto mt-12 grid max-w-[640px] gap-3 text-left sm:grid-cols-3">
+        {
+          getSteps.map((s, i) => (
+            <li
+              class:list={[
+                "card px-5 py-5",
+                i === 0 && "border-accent/30 opacity-70",
+                i === 1 && "border-accent/50 ring-1 ring-accent/20",
+              ]}
+            >
+              <p class="font-mono text-sm text-accent">{s.n}</p>
+              <h2 class="mt-2 text-base font-semibold text-text">
+                {i === 0 ? "Bought" : s.title}
+              </h2>
+              <p class="mt-1.5 text-sm leading-relaxed text-text-secondary">
+                {i === 0 ? "Done. License on the way." : s.body}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="card mx-auto mt-12 max-w-[520px] p-6 text-left sm:p-8">
+        <p class="mono-label">NEXT</p>
+        <h2 class="mt-2 text-xl font-bold text-text">Make the first call in ~60 seconds</h2>
+        <ol class="mt-5 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-text-secondary">
+          <li>Open the email we sent (check spam if it’s not there in a few minutes).</li>
+          <li>Install DailyDialz on your {site.minAndroid} phone.</li>
+          <li>Connect your lead list, preview the first lead, tap to call.</li>
+        </ol>
+        <p class="mt-6 text-sm text-text-muted">
+          Need help? Email{" "}
+          <a
+            href={`mailto:${site.email}`}
+            class="text-text underline decoration-border underline-offset-2 hover:text-accent"
+            >{site.email}</a
+          >
+          {" "}or{" "}
+          <a href="/contact" class="text-text underline decoration-border underline-offset-2 hover:text-accent"
+            >contact us</a
+          >.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <a href="/" class="btn-primary">Back to home</a>
+        <a href="/how-it-works" class="btn-ghost">How it works →</a>
+      </div>
+
+      <p class="mt-8 text-xs text-text-muted">
+        {site.refundDays}-day money-back guarantee ·{" "}
+        <a href="/refund" class="underline decoration-border underline-offset-2 hover:text-accent">Refund policy</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const STORAGE_KEY = "dailydialz_checkout";
+  const el = document.getElementById("buyer-summary");
+  if (el) {
+    const params = new URLSearchParams(window.location.search);
+    let email = params.get("email") || "";
+    let provider = params.get("provider") || "";
+    let order = params.get("order") || params.get("session_id") || "";
+
+    try {
+      const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}");
+      if (!email && stored.email) email = stored.email;
+      if (!provider && stored.provider) provider = stored.provider;
+    } catch {
+      /* ignore */
+    }
+
+    const bits = [];
+    if (email) bits.push(`Receipt for <strong class="text-text">${escapeHtml(email)}</strong>`);
+    if (provider) bits.push(`via ${escapeHtml(provider === "stripe" ? "Stripe" : provider === "paypal" ? "PayPal" : provider)}`);
+    if (order) bits.push(`ref ${escapeHtml(order)}`);
+
+    if (bits.length) {
+      el.innerHTML = bits.join(" · ");
+      el.classList.remove("hidden");
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+</script>
