@@ -99,15 +99,28 @@ body {
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
-  transition: filter 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 0 0 0 transparent;
+  transition:
+    filter 0.2s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px -6px rgb(180 255 57 / 0.45),
+    0 0 0 1px rgb(180 255 57 / 0.25);
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
+  filter: brightness(1.02);
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px -2px rgb(180 255 57 / 0.3),
+    0 0 0 1px rgb(180 255 57 / 0.15);
+  transition-duration: 0.08s;
 }
 
 .btn-ghost {
@@ -119,11 +132,21 @@ body {
   font-weight: 500;
   font-size: 18px;
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.2s ease;
 }
 
 .btn-ghost:hover {
   color: var(--color-accent);
+  transform: translateY(-1px);
+  text-shadow: 0 0 18px rgb(180 255 57 / 0.35);
+}
+
+.btn-ghost:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
 }
 
 .prose-legal h2 {
